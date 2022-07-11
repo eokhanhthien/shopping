@@ -94,7 +94,7 @@
                   </div>
                   <div class="thumbnail-name-product"><?= $val['name'] ?></div>
                   <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
-                  <a href="home/addcart/<?= $val['slug'] ?>"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>
+                  <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>')"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
         <?php } ?>
       <?php } ?>
@@ -107,7 +107,7 @@
         <div class="deliver-content">Ship COD toàn quốc. Nhận hàng trong vòng 2-3 ngày</div>
       </div>
 
-      <div class="col col-xxl-4 deliver-container">
+      <div class="col col-xxl-4 deliver-container bd-lf-custom">
         <i class="fa-solid fa-rotate-left deliver-icon"></i>
         <div class="deliver-title">Hoàn Trả Miễn Phí</div>
         <div class="deliver-content">Xem hàng trước khi nhận. Hoàn trả miễn phí nếu không hài lòng</div>

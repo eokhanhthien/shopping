@@ -1,7 +1,16 @@
 <?php
 class MyModels extends Database{
     // db.php -> kết nối với CSDL , MyModels.php -> kết nối với bảng trong CSDL
-    function select_array( $data = '*' , $where = NULL , $orderby = NULL, $start = NULL, $limit = NULL){
+    function select_array( $data = '*' , 
+    $where = NULL , 
+    $orderby = NULL, 
+    $start = NULL, 
+    $limit = NULL, 
+    $fields_in = NULL, 
+    $array_where_in = NULL,
+    $fields_not_in = NULL, 
+    $array_where_not_in = NULL,
+    ){
         $sql = "SELECT $data FROM $this->table";
         if(isset($where) && $where != NULL){
             $fields = array_keys($where);
@@ -19,12 +28,17 @@ class MyModels extends Database{
                 $sql .= " ".$stringWhere." ".$fields[$i]." = ?";
             }
             // echo $sql;die;
-
-            if($limit != NULL ){
-                $sql .= " LIMIT ".$start." , ".$limit."";  
+            if($fields_in != NULL && $array_where_in != NULL){
+                $sql .= ' '.$this->where_in($fields_in , $array_where_in,true).' ';
+            }
+            if($fields_not_in != NULL && $array_where_not_in != NULL){
+                $sql .= ' '.$this->where_not_in($fields_not_in , $array_where_not_in,true).' ';
             }
             if($orderby !='' && $orderby != NULL){
                 $sql .= " ORDER BY ".$orderby."";
+            }
+            if($limit != NULL ){
+                $sql .= " LIMIT ".$start." , ".$limit."";  
             }
             $query = $this->conn->prepare($sql);
             $query->execute($values);
@@ -338,6 +352,20 @@ class MyModels extends Database{
                 $string_where = ' and '; 
             }
             $qr .= $string_where.' '.$fields.' not in ('.$values.')';
+        }
+        return $qr;
+    }
+
+    function where_in($fields = NULL , $array = NULL, $is_where = false){
+        $qr = '';
+        $string_where = ' where ';
+        $id_array = array_values($array);
+        $values = implode(',',$id_array);
+        if($fields != NULL && $array != NULL){
+            if($is_where == true){
+                $string_where = ' and '; 
+            }
+            $qr .= $string_where.' '.$fields.'  in ('.$values.')';
         }
         return $qr;
     }

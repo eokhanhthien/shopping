@@ -1,12 +1,15 @@
 <?php
 // Bình thường auto chạy vào home/index
     class home extends controller {
-        public $MyModels;
-        public $ProductModels;
+        // public $SlugModels;
+        // public $ProductModels;
+        // public $PhotoModels;
         // hàm __construct() luôn chạy khi vừa vào;
         function __construct(){
-            $this->MyModels = $this->models('MyModels');
+            $this->SlugModels = $this->models('SlugModels');
             $this->ProductModels = $this->models('ProductModels');
+            $this->PhotoModels = $this->models('PhotoModels');
+            $this->CategoryModels = $this->models('CategoryModels');
         }
 
         public function index()  {
@@ -22,9 +25,40 @@
 
         
          function detail($slug){
-            $data = $this->ProductModels->select_array('*',['slug' => $slug]);
-            echo "<pre>";
-            print_r($data);die;
+            $datas = $this->SlugModels->select_row('*', ['name' => $slug]);
+            if($datas['type'] == 2){
+                $data = $this->getProductDetail($slug);
+                // echo "<pre>";
+                // print_r($data);die;
+                $this->viewFrontEnd('frontend/masterlayout',$data);
+            }
+         }
+
+         function getProductDetail($slug){
+            $data = [];
+            $data['page'] = 'home/detail';
+            $data['product'] = $this->ProductModels->select_row('*', ['slug' => $slug]);
+            $data['list_images'] = $this->PhotoModels->select_array('*' , ['productID' => $data['product']['id'] ]);
+            $cateSame= $this->sameProduct($data['product']['cateID']);
+            $data['product_same'] = $this->ProductModels->select_array('*',['publish' => 1],'id desc',0,4,'cateID',$cateSame,'id', array($data['product']['id']));
+            // echo "<pre>";
+            // print_r($data['product_same']);die;
+            return $data;
+         }
+
+         function sameProduct($cateID){
+            $array = [];
+            $data = $this->CategoryModels->select_row('*',['id' => $cateID]);
+            if($data['parentID'] != 0){
+                $cate = $this->CategoryModels->select_array('*',['parentID' =>$data['parentID']]);
+                foreach($cate as $value){
+                    $array[] = $value['id'];
+                }
+            }
+            else{
+                $array[] = $data['id'];
+            }
+            return $array;
          }
 
          function addcart(){
@@ -35,11 +69,31 @@
             }
          }
 
+         function deletecart(){
+            //ajax nhận lại 1 cái $_POST['id'] chứ không phải deletecart(id)
+            // echo $_POST['id'];die;
+            unset($_SESSION['cart'][$_POST['id']]);
+         }
+
          function cart(){
-             echo "<pre>";
-            print_r($_SESSION['cart']);die;
+            $cart = [];
+            if(isset($_SESSION['cart'])){
+            $cart = $_SESSION['cart'];
+            }
+            // echo "<pre>";
+            // print_r(count($_SESSION['cart']));die;
+
+            $totalMoney = 0;
+            foreach($_SESSION['cart'] as $key => $val){
+                $totalMoney += $val['price'] * $val['qty'];
+            }
+            // echo "<pre>";
+            // print_r($totalMoney);die;
+
             $data = [
                 'page'      => 'home/cart',
+                'cart'      => $cart,
+                'totalMoney'       => $totalMoney,
             ];
              $this->viewFrontEnd('frontend/masterlayout',$data);
          }

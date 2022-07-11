@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="public/build/images/favicon.ico" type="image/ico" />
     <base href="http://localhost/shopping/" >
-    <title>Gentelella Alela! | </title>
+    <title>Manager Admin</title>
 
     <!-- Bootstrap -->
 
