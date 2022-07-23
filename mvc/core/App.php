@@ -43,8 +43,10 @@ class App{
 
     // Cắt dấu / url thành 1 phần tử trong aray[n] // print_r($array);
     function urlProcess(){
-        if(isset($_GET['url'])){
-            return explode("/",filter_var(trim($_GET['url'],"/")));
+        // echo "<pre>";
+        // print_r($_SERVER);die;
+        if(isset($_SERVER['PATH_INFO'])){
+            return explode("/",filter_var(trim($_SERVER['PATH_INFO'],"/")));
         }
     }
 }

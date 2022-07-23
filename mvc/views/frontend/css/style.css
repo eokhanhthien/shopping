@@ -340,16 +340,16 @@
 .remove-from-cart:hover{
     border: 2px solid rgb(0, 0, 0);
 }
-.remove-from-cart:hover a{
+.remove-from-cart:hover p{
     color: rgb(0, 0, 0);
 }
-.remove-from-cart a {
+.remove-from-cart p {
     text-decoration: none;
     color: #ccc;
     transform: translate(-50%, -50%);
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 52%;
 }
 .thumb-img-cart{
     width: 60px;
@@ -364,12 +364,12 @@
     text-align: left;
 }
 
-button.btn-quantity {
-    width: 20px;
-    height: 30px;
-    outline: none;
+.btn-quantity {
+    text-align: center;
     border: 1px solid #ccc;
+    cursor: pointer;
 }
+
 .quantity-product-cart {
     padding: 4px;
 }
@@ -398,10 +398,24 @@ button.btn-quantity {
     text-decoration: none;
     cursor: pointer;
 }
+.update-cart-btn{
+    padding: 4px 8px;
+    border: 2px solid rgb(74 74 74);
+    font-size: 14px;
+    background-color: rgb(74 74 74);
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-action-cart a{
+    text-decoration: none;
+}
+.update-cart-btn:hover,
 .back-view-btn:hover{
     background-color: #000;
     color: rgb(255, 255, 255);
-
+    border: 2px solid #000;
 }
 
 .sale-icon {
@@ -628,4 +642,59 @@ button.btn-quantity {
 .bd-lf-custom{
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
+}
+input.input_value_quantity {
+    width: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 2px;
+    border-left: none;
+    border-right: none;
+    outline: none;
+}
+ 
+input.input_value_quantity::-webkit-outer-spin-button,
+input.input_value_quantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+     margin: 0;
+}
+
+.header-info-customer {
+    text-align: end;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+
+}
+.info-customer{
+}
+.drop-down-info {
+    position: absolute;
+    text-align: start;
+    background-color: rgb(255, 255, 255);
+    font-size: 16px;
+    padding: 10px;
+    line-height: 36px;
+    right: 0;
+    border-radius: 3px;
+    width: 180px;
+    top: 74%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s;
+}
+
+.header-info-customer:hover .drop-down-info{
+    visibility: visible;
+    opacity: 1;
+}
+.drop-down-info-item a{
+    color: #333;
+    text-decoration: none;
+}
+
+.drop-down-info-item:hover a{
+    color: rgb(0, 0, 0);
 }

@@ -14,8 +14,23 @@
                 <div class="col col-xl-4 col-xxl-5">
                   <div class="row g-0">
                     <div class="col header-custom-text"><a href="home/cart" >GIỎ HÀNG <i class="fa-solid fa-cart-shopping"></i></a> </div>
-                    <div class="col header-custom-text">ĐĂNG KÝ</div>
-                    <div class="col header-custom-text">ĐĂNG NHẬP</div>
+                    <?php if(isset($_SESSION['user']) && $_SESSION['user'] != NULL) {?>
+                          <div class="col col-xl-4 header-info-customer"> 
+                            
+                          <span class="info-customer">THÔNG TIN <i class="fas fa-user-circle"></i> <i class="fas fa-caret-down"></i></span> 
+                            <div class="drop-down-info">
+                              <div class="drop-down-info-item">Thông tin tài khoản</div>
+                              <div class="drop-down-info-item">Thông tin đơn hàng</div>
+                              <div class="drop-down-info-item"> <a href="authen/logout">Đăng xuất</a> </div>
+                            </div>
+
+
+                          </div>
+                    <?php }else{?>
+                          <div class="col col-xl-4 header-custom-text"><a href="authen/register">ĐĂNG KÝ</a> </div>
+                          <div class="col col-xl-4 header-custom-text"><a href="authen">ĐĂNG NHẬP</a> </div>
+                      <?php }?>
+
                   </div>
                 </div>
             </div>

@@ -72,8 +72,27 @@
          function deletecart(){
             //ajax nhận lại 1 cái $_POST['id'] chứ không phải deletecart(id)
             // echo $_POST['id'];die;
-            unset($_SESSION['cart'][$_POST['id']]);
-         }
+            unset($_SESSION['cart'][$_GET['id']]);
+            header("location: cart");
+            // print_r($_GET['id']);
+            // die;
+        }
+
+        function updatecart(){
+            if(isset($_POST['update'])){
+                if(isset($_SESSION["cart"])){
+                    foreach($_SESSION["cart"] as $value){
+                        if($_POST["quantity".$value["id"]] <= 0){
+                            unset($_SESSION['cart'][$value['id']]);
+                        }
+                        else{
+                            $_SESSION['cart'][$value['id']]["qty"] = $_POST["quantity".$value["id"]];
+                        }
+                    }
+                }
+            }
+            header("location: cart");
+        }
 
          function cart(){
             $cart = [];
@@ -83,17 +102,9 @@
             // echo "<pre>";
             // print_r(count($_SESSION['cart']));die;
 
-            $totalMoney = 0;
-            foreach($_SESSION['cart'] as $key => $val){
-                $totalMoney += $val['price'] * $val['qty'];
-            }
-            // echo "<pre>";
-            // print_r($totalMoney);die;
-
             $data = [
                 'page'      => 'home/cart',
                 'cart'      => $cart,
-                'totalMoney'       => $totalMoney,
             ];
              $this->viewFrontEnd('frontend/masterlayout',$data);
          }
