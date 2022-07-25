@@ -35,6 +35,8 @@ require_once "./mvc/core/redirect.php";
                         'keys'      =>KEY,
                         'info'      =>[
                         'id'        => $checkUni['id'],
+                        'username'  => $checkUni['username'],
+                        'fullname'  => $checkUni['fullname'],
                         'logged'    => true  
                         ]
                         
@@ -42,6 +44,7 @@ require_once "./mvc/core/redirect.php";
                     $jwt = $this->JWTOKEN->CreateToken($array);
                     // $_SESSION['admin'] =  $array;
                     $_SESSION['user'] =  $jwt;
+                    $_SESSION['user-info'] =  $array;
                     
                     // echo "<pre>";
                     // print_r( $checkUni);die;
@@ -95,6 +98,7 @@ require_once "./mvc/core/redirect.php";
         function logout(){
             if(isset($_SESSION['user']) && $_SESSION['user'] != NULL){
                 unset($_SESSION['user']);
+                unset($_SESSION['user-info']);
                 header("location: http://localhost/shopping");
             }
         }

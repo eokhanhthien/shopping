@@ -65,9 +65,29 @@
             // echo $_POST['slug'];die;
             $data = $this->ProductModels->select_row('*',['slug' => $_POST['slug']]);
             if($data != NULL){
-                $cart = $this->addtoCart($data);
+                $cart = $this->addtoCart($data , $_POST['quantity']);
             }
+            
          }
+
+         function addtoCart($array , $quantity){
+            if(isset($_SESSION['cart'])){
+                if(array_key_exists($array['id'], $_SESSION['cart'])){
+                    $_SESSION['cart'][$array['id']]['qty'] += $quantity;
+                }
+                else{
+                    $_SESSION['cart'][$array['id']] = $array;
+                    $_SESSION['cart'][$array['id']]['qty'] = $quantity;
+                }
+    
+            }
+            else{
+                $_SESSION['cart'][$array['id']] = $array;
+                $_SESSION['cart'][$array['id']]['qty'] = $quantity;
+            }        
+            // echo "<pre>";
+            // print_r($_SESSION['cart']);
+        }
 
          function deletecart(){
             //ajax nhận lại 1 cái $_POST['id'] chứ không phải deletecart(id)

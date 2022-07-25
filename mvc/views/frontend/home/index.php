@@ -71,7 +71,7 @@
                   </div>
                   <div class="thumbnail-name-product"><?= $val['name'] ?></div>
                   <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
-                  <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>')"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>
+                  <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
         <?php } ?>
       <?php } ?>
@@ -94,8 +94,8 @@
                   </div>
                   <div class="thumbnail-name-product"><?= $val['name'] ?></div>
                   <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
-                  <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>')"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>
-              </div>
+                  <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>              
+                </div>
         <?php } ?>
       <?php } ?>
      </div>
@@ -126,13 +126,18 @@
   </div>
 
   <script>
-    function addtoCart(slug){
+    function addtoCart(slug,quantity){
       $.ajax({
         url:"home/addcart",
         method:"post",
-        data: {slug:slug}, 
-        success : function(response) {
-
+        data: {
+          slug:slug,
+          quantity:quantity
+        }, 
+        success : function(response) { 
+          $(".cart-container").load(" .cart-container");
+          $("#cart-quantity").load(" #cart-quantity");
+         
 		}
     })
     }

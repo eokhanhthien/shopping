@@ -116,7 +116,7 @@
             <div class="row">
                 <div class="col col-6"><span class="price-custom-text">Tổng tiền:</span> </div>
                 <div class="col col-6 text-right"><span class="price-custom-text "> <?= number_format($totalMoney+20000) ?>đ</span> </div>
-                <div class="col col-12"> <button class = "pay-product">TIẾN HÀNH THANH TOÁN</button> </div>
+                <div class="col col-12"> <button onclick="handelPayment()" class = "pay-product">TIẾN HÀNH THANH TOÁN</button> </div>
             </div>
      </div>
      <?php } else {?>  
@@ -137,3 +137,15 @@
 </body>
 </html>
 
+<script>
+    function handelPayment(){
+        var isLogin = <?php echo isset($_SESSION['user'])?'true':'false'; ?>;
+        if(isLogin){
+            alert("Đã đăng nhập");
+        }
+        else{
+            alert("Hãy đăng nhập để tiến hành thanh toán");
+            window.location.href = "http://localhost/shopping/authen";
+        }
+    }
+</script>

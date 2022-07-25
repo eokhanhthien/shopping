@@ -106,14 +106,14 @@
 
                     <div class="row g-0 mt-3">
                         <div class="col col-3">
-                            <div class="row g-0">
-                                <div class="col quantity-detail btn-change">-</div>
-                                <div class="col quantity-detail">1</div>
-                                <div class="col quantity-detail btn-change">+</div>    
-                            </div>
+                        <div class="row g-0">
+                            <div onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="col btn-quantity">-</div>
+                            <input class="col input_value_quantity" min="1" type="number" value= "1" >
+                            <div onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="col btn-quantity">+</div>
+                        </div>
                         
                         </div>
-                        <div class="col col-5"><div class="detail-add-to-cart">THÊM VÀO GIỎ HÀNG</div> </div>
+                        <div class="col col-5"><div class="detail-add-to-cart" onclick="addCartDetail('<?= $data['product']['slug'] ?>')">THÊM VÀO GIỎ HÀNG</div> </div>
                     </div>
 
                 </div>
@@ -184,7 +184,7 @@
                             </div>
                             <div class="thumbnail-name-product"><?= $val['name'] ?></div>
                             <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
-                            <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>')"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a> 
                         </div>
                     <?php } ?>
                 <?php } ?>
@@ -251,14 +251,25 @@
 </script>
 <!-- Tab end -->
 <script>
-    function addtoCart(slug){
+    function addtoCart(slug,quantity){
       $.ajax({
         url:"home/addcart",
         method:"post",
-        data: {slug:slug}, 
-        success : function(response) {
-
+        data: {
+          slug:slug,
+          quantity:quantity
+        }, 
+        success : function(response) { 
+          $(".cart-container").load(" .cart-container");
+          $("#cart-quantity").load(" #cart-quantity");
+         
 		}
     })
+    }
+
+
+    function addCartDetail(slug) {
+        quantity = document.querySelector(".input_value_quantity").value;
+        addtoCart(slug,quantity);
     }
   </script>

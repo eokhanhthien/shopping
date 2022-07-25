@@ -20,23 +20,4 @@ class controller{
     function viewFrontEnd($view, $data = []){
         require_once "./mvc/views/".$view.".php";
     }
-
-    function addtoCart($array){
-        if(isset($_SESSION['cart'])){
-            if(array_key_exists($array['id'], $_SESSION['cart'])){
-                $_SESSION['cart'][$array['id']]['qty'] += 1;
-            }
-            else{
-                $_SESSION['cart'][$array['id']] = $array;
-                $_SESSION['cart'][$array['id']]['qty'] = 1;
-            }
-
-        }
-        else{
-            $_SESSION['cart'][$array['id']] = $array;
-            $_SESSION['cart'][$array['id']]['qty'] = 1;
-        }        
-        // echo "<pre>";
-        // print_r($_SESSION['cart']);
-    }
 }
