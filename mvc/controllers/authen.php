@@ -18,7 +18,7 @@ require_once "./mvc/core/redirect.php";
             if(isset($_SESSION['user']) && $_SESSION['user'] != NULL){
                 header("location: http://localhost/shopping");
             }
-            $this->viewFrontEnd('frontend/user/login',);
+            $this->viewFrontEnd('frontend/user/usertemplate/login',);
         }
 
         public function login(){
@@ -92,7 +92,7 @@ require_once "./mvc/core/redirect.php";
 
             }
 
-            $this->viewFrontEnd('frontend/user/register',);
+            $this->viewFrontEnd('frontend/user/usertemplate/register',);
         }
 
         function logout(){

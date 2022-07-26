@@ -58,7 +58,7 @@
             <div class="container-menu">
               <div class="row g-0">
                 <div class="col header-menu-text header-menu-active"> <a href="">TRANG CHỦ</a> </div>
-                <div class="col header-menu-text"> <a href="">ĐIỆN THOẠI</a> </div>
+                <div class="col header-menu-text"> <a href="home/smartphone">ĐIỆN THOẠI</a> </div>
                 <div class="col header-menu-text"> <a href="">MÁY TÍNH BẢNG</a> </div>
                 <div class="col header-menu-text"> <a href="">LAPTOP</a> </div>
                 <div class="col header-menu-text"> <a href="">PHỤ KIỆN</a> </div>

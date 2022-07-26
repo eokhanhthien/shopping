@@ -120,6 +120,7 @@ body::-webkit-scrollbar-thumb
     width: 100%;
     height: 600px;
 }
+
 .intrduce {
     position: absolute;
     top: 36%;
@@ -736,4 +737,74 @@ input.input_value_quantity::-webkit-inner-spin-button {
     line-height: 22px;
     border-radius: 50%;
     font-size: 14px;
+}
+
+.Content-banner-category{
+    height: 400px;
+    width: 100%;
+    background-image: url("https://wallpaperaccess.com/full/1314202.jpg");
+    animation: rain 40s linear infinite;
+    position: relative;
+    object-fit: contain;
+}
+
+@keyframes rain {
+    0% {
+        background-position: 0px 0px;
+    }
+    100% {
+        background-position: -500px 1000px;
+    }
+}
+
+.intrduce-category {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    transform: translate(-50%, -50%);
+}
+.sort-select-container{
+    justify-content: end;
+}
+.custom-select-sort{
+    outline: none;
+    text-align: end;
+}
+.custom-select-sort select{
+    outline: none;
+    padding: 4px;
+}
+.tag-category-product {
+    font-size: 19px;
+    font-weight: 600;
+}
+.filter-tag {
+    border: 1px solid #ccc;
+    padding: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #fbfbfb;
+}
+.filter-option {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-top: none;
+}
+.filter-option input {
+    cursor: pointer;
+}
+
+.filter-tag-container{
+
+}
+.filter-option-container{
+    width: 100%;
+    display:none;
+    transition: .3s;
+}
+
+.filter-active{
+    display:block;
 }

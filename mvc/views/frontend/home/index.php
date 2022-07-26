@@ -64,7 +64,7 @@
      <div class="row">
       <?php if(isset($data['product']) && $data['product'] != NULL) { ?>
         <?php foreach($data['product'] as $key => $val) {?>
-              <div class="col col-xxl-3 product-item">
+              <div class="col col-xl-3 product-item">
                   <div class="thumbnail-avt-product">
                      <a href="home/detail/<?= $val['slug'] ?>"><img src="<?= $val['image'] ?>" alt=""></a> 
                       <div class="tab-detail-product">CHI TIẾT</div>

@@ -129,4 +129,12 @@
              $this->viewFrontEnd('frontend/masterlayout',$data);
          }
 
+
+         public function smartphone(){
+            $data = [
+                'page'      => 'smartphone/smartphone',
+            ];
+            $this->viewFrontEnd('frontend/masterlayout',$data);
+         }
+
     }
