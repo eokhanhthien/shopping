@@ -301,7 +301,7 @@ require_once "./mvc/controllers/MyController.php";
             $rows = $this->ProductModels->select_array_join_table('tbl_product.*,tbl_category.name as name_cate',NULL,'tbl_product.id desc',NULL,NULL,'tbl_category','tbl_category.id = tbl_product.cateID','LEFT');
 
             // echo "<pre>";
-            // print_r($datas);
+            // print_r($rows);
             // die;
 
 

@@ -5,15 +5,19 @@
         // public $ProductModels;
         // public $PhotoModels;
         // hàm __construct() luôn chạy khi vừa vào;
+        public $Functions;
         function __construct(){
             $this->SlugModels = $this->models('SlugModels');
             $this->ProductModels = $this->models('ProductModels');
             $this->PhotoModels = $this->models('PhotoModels');
             $this->CategoryModels = $this->models('CategoryModels');
+
+            $this->Functions = $this->heler('Functions');
+
         }
 
         public function index()  {
-            $product = $this->ProductModels->select_array('*',['publish' => 1] ,'id desc');
+            $product = $this->ProductModels->select_array('*',['publish' => 1] ,'id desc',0,8);
             // echo "<pre>";
             // print_r($_SESSION['cart']);die;
             $data = [
@@ -62,7 +66,7 @@
          }
 
          function addcart(){
-            // echo $_POST['slug'];die;
+            // echo $_POST['quantity'];die;
             $data = $this->ProductModels->select_row('*',['slug' => $_POST['slug']]);
             if($data != NULL){
                 $cart = $this->addtoCart($data , $_POST['quantity']);
@@ -130,11 +134,105 @@
          }
 
 
-         public function smartphone(){
-            $data = [
-                'page'      => 'smartphone/smartphone',
-            ];
-            $this->viewFrontEnd('frontend/masterlayout',$data);
+         public function smartphone(){     
+            // Lấy sản phẩm là điện thoại để đổ ra bảng tableProduct
+                $cateSame= $this->sameProduct(62);
+
+            //Lấy dữ liệu hãng cho filter
+                $brand = $this->CategoryModels->select_array('*',['publish' => 1 , 'parentID' => 61]);
+                // echo "<pre>";
+                // print_r($brand);die;
+
+                                
+                $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
+                
+                $limit = 6;
+                $page = 1;
+                $total_rows = count($rows);
+                $total_pages = ceil($total_rows / $limit);
+                $start = ($page -1) * $limit;
+                $button_pagination = $this->Functions->pagination($total_pages,$page);
+ 
+                $product = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,$start,$limit,'cateID',$cateSame,'id', NULL);
+
+                $data = [
+                    'page'      => 'smartphone/smartphone',
+                    'product'   => $product,
+                    'brand'     => $brand,
+                    'button_pagination' => $button_pagination,
+
+                ];
+                $this->viewFrontEnd('frontend/masterlayout',$data);
+            
+           
+            // ============ > Không nhận được $_POST['orderby'] bị UNDEFINE 
+            // print_r($_POST['orderby']);die;
+            // có mà ta
+            // echo "<pre></pre>";
+            // print_r($_POST['orderby']);
+           
+         }
+
+         public function loadProduct(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // bỏ vào đây hả anh ?
+                // E định lấy $_POST['orderby'] gán vô để xếp giá lại 
+                
+                $order = $_POST['orderby'] != NULL ? 'price '.$_POST['orderby'] : ' id DESC';
+                $cateID = $_POST['cateID'] != NULL &&  $_POST['cateID'] != '' ? $_POST['cateID'] : NULL ;
+                $betweenPrice = $_POST['betweenPrice'] != NULL &&  $_POST['betweenPrice'] != "" ? $_POST['betweenPrice'] : NULL ;
+
+                $cateSame= $this->sameProduct(62);
+                
+
+                $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
+                
+                $limit = 6;
+                $page = isset($_POST['page'])?$_POST['page']:1;
+                $total_rows = count($rows);
+                $total_pages = ceil($total_rows / $limit);
+                $start = ($page -1) * $limit;
+                $button_pagination = $this->Functions->pagination($total_pages,$page);
+
+                if($cateID == 'ALL'){
+                    $product = $this->ProductModels->select_array('*',['publish' => 1 ],$order ,$start,$limit,'cateID',$cateSame,'id', NULL,$betweenPrice);
+
+                }
+                else{
+                    $product = $this->ProductModels->select_array('*',['publish' => 1 , 'cateID' => $cateID],$order ,$start,$limit,'cateID',$cateSame,'id', NULL,$betweenPrice);
+
+                }
+                
+                $data = [
+                    'page'      => 'smartphone/smartphone',
+                    'product'   => $product,
+                    'button_pagination' => $button_pagination,
+
+                ];
+                $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
+            }
+            else{
+                $cateSame= $this->sameProduct(62);
+                
+                $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
+                
+                $limit = 6;
+                $page = $_POST['page']?$_POST['page']:1;
+                $total_rows = count($rows);
+                $total_pages = ceil($total_rows / $limit);
+                $start = ($page -1) * $limit;
+                $button_pagination = $this->Functions->pagination($total_pages,$page);
+
+                $product = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,$start,$limit,'cateID',$cateSame,'id', NULL ,NULL);
+
+                $data = [
+                    'page'      => 'smartphone/smartphone',
+                    'product'   => $product,
+                    'button_pagination' => $button_pagination,
+
+                ];
+                $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
+            }
          }
 
     }

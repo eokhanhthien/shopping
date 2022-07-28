@@ -10,6 +10,7 @@ class MyModels extends Database{
     $array_where_in = NULL,
     $fields_not_in = NULL, 
     $array_where_not_in = NULL,
+    $filter = NULL
     ){
         $sql = "SELECT $data FROM $this->table";
         if(isset($where) && $where != NULL){
@@ -28,6 +29,11 @@ class MyModels extends Database{
                 $sql .= " ".$stringWhere." ".$fields[$i]." = ?";
             }
             // echo $sql;die;
+
+            if($filter != '' && $filter != NULL){
+                $sql .= " ".$filter." " ; 
+            }
+
             if($fields_in != NULL && $array_where_in != NULL){
                 $sql .= ' '.$this->where_in($fields_in , $array_where_in,true).' ';
             }
@@ -55,7 +61,7 @@ class MyModels extends Database{
             $query = $this->conn->prepare($sql);
             $query->execute();
         }
-
+        // echo $sql;
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 

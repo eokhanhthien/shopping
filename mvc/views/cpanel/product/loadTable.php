@@ -19,7 +19,7 @@
           </thead>
 
 
-          <?php if(isset($data['datas']) && isset($data['datas']) != NULL ){ ?>
+          <?php if(isset($data['datas']) && $data['datas'] != NULL ){ ?>
           <tbody>
           <?php foreach($data['datas'] as $key => $val) {?>
               <tr class="even pointer">

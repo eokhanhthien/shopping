@@ -35,13 +35,13 @@ $redirect = new redirect();
       <a href="" > <button class="back-home"> <i class="fas fa-angle-double-left"></i> Trở về </button></a> 
       <div class="row">
         <div class="col-md-6">
-          <img src="mvc/views/frontend/user/usertemplate/images/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+          <img src="mvc/views/frontend/images/login.png" alt="Image" class="img-fluid">
         </div>
         <div class="col-md-6 contents">
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
-              <h3>Đăng nhập</h3>
+              <h1>Đăng nhập</h1>
             </div>
             <form action='authen/login' method="post">
               <div class="form-group first">
@@ -55,7 +55,7 @@ $redirect = new redirect();
               
 
 
-              <input name="submit" type="submit" value="Đăng nhập" class="btn btn-block btn-primary">
+              <input name="submit" type="submit" value="Đăng nhập" class="btn btn-block btn-primary btn-custom-login">
               <span class="d-block text-left my-4 text-muted">  <a class="create_account" href="authen/register">Đăng ký tài khoản mới</a></span>
               
             </form>
