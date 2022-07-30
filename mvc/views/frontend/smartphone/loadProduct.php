@@ -16,10 +16,12 @@
 <?php } ?>
 
 </div>
+      <div class="center-pagination">
+                <ul class="pagination">
+                <?= $data['button_pagination']; ?>
+              </ul>  
+      </div>
 
-        <ul class="pagination">
-          <?= $data['button_pagination']; ?>
-        </ul>  
 
         <script>
   $(document).ready(function(){

@@ -56,7 +56,7 @@
                                     </div>
                                     <div class=" col col-3 ">
                                         <div class="thumb-img-cart">
-                                            <img src="<?= $val['image'] ?>" alt="">
+                                        <a href="home/detail/<?= $val['slug'] ?>"> <img src="<?= $val['image'] ?>" alt=""> </a>
                                     </div>
                                     </div>
                                     <div class="col col-8"><?= $val['name'] ?></div>

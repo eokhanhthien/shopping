@@ -135,9 +135,15 @@
           quantity:quantity
         }, 
         success : function(response) { 
-          $(".cart-container").load(" .cart-container");
+          //Load lại số lượng sp trên icon cart
           $("#cart-quantity").load(" #cart-quantity");
-         
+
+          //Load lại số lượng sp trong cart hover
+          $("#drop-down-cart").load(" #drop-down-cart > *"); 
+          // $(".cart-container").load(" .cart-container");
+          // $("#cart-quantity").load(location.href + " #cart-quantity");
+          // quantity cart trên icon khi không có phải reder ra 0 đê không bị lỗi
+
 		}
     })
     }

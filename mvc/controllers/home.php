@@ -197,10 +197,20 @@
                 if($cateID == 'ALL'){
                     $product = $this->ProductModels->select_array('*',['publish' => 1 ],$order ,$start,$limit,'cateID',$cateSame,'id', NULL,$betweenPrice);
 
+                    //Phân trang lại
+                    $rows = $this->ProductModels->select_array('*',['publish' => 1 ],$order ,$start,NULL,'cateID',$cateSame,'id', NULL,$betweenPrice);
+                    $total_rows = count($rows);
+                    $total_pages = ceil($total_rows / $limit);
+                    $button_pagination = $this->Functions->pagination($total_pages,$page);
                 }
                 else{
                     $product = $this->ProductModels->select_array('*',['publish' => 1 , 'cateID' => $cateID],$order ,$start,$limit,'cateID',$cateSame,'id', NULL,$betweenPrice);
-
+                    
+                    //Phân trang lại
+                    $rows = $this->ProductModels->select_array('*',['publish' => 1 ,'cateID' => $cateID],$order ,$start,NULL,'cateID',$cateSame,'id', NULL,$betweenPrice);
+                    $total_rows = count($rows);
+                    $total_pages = ceil($total_rows / $limit);
+                    $button_pagination = $this->Functions->pagination($total_pages,$page);
                 }
                 
                 $data = [
@@ -232,6 +242,31 @@
 
                 ];
                 $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
+            }
+         }
+
+         function search(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $seach_name = $_POST['seach_name'] != "" ?$_POST['seach_name']:"";
+                $sql="";
+                $sql .= "SELECT * FROM `tbl_product` WHERE name like" ." ".'"%'.$seach_name.'%"';
+                $product = $this->ProductModels->query($sql);
+                $output = "";
+                foreach($product as $val){
+                    $output .= '<div class="row g-0 cart-header-item">
+                    <div class="col col-xl-3">
+                    <div class="img-size-search">
+                    <a href="home/detail/'.$val['slug'].'"><img src="'. $val['image'].'" alt=""></a>
+                    </div>
+                    </div>
+                    <div class="col col-xl-7"> <div class="text-name-search">'. $val['name'].'</div> <div class="text-price-search">'. number_format($val['price']).'đ</div> </div>
+                    <div class="col col-xl-2"><i class="fas fa-cart-plus"></i> </div>
+                    </div>';
+                    
+                 }
+                
+                echo $output;
+                
             }
          }
 

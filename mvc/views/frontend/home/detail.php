@@ -260,8 +260,8 @@
           quantity:quantity
         }, 
         success : function(response) { 
-          $(".cart-container").load(" .cart-container");
           $("#cart-quantity").load(" #cart-quantity");
+          $("#drop-down-cart").load(" #drop-down-cart > *"); 
          
 		}
     })
