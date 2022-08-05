@@ -80,17 +80,29 @@
                     <div class="detail-title">ĐIỆN THOẠI</div>
                     <div class="detail-name"><?= $data['product']['name'] ?></div>
                     <div class="detail-price"><?= number_format($data['product']['price']) ?>đ</div>
+
                     <div class="row g-0 mt-4">
-                        <div class="col col-2"><div class="properties-choose">64GB</div> </div>
-                        <div class="col col-2"><div class="properties-choose">128GB</div> </div>
-                        <div class="col col-2"><div class="properties-choose">256GB</div> </div>   
+                        <?php if(isset($data['product']['optionproduct']) && $data['product']['optionproduct'] != '') 
+                        $optionproduct =json_decode($data['product']['optionproduct'], true);
+                        ?>
+
+                        <?php if(isset($optionproduct) && $optionproduct != NULL) {?>
+                        <div class="col col-12 detail-option">Cấu hình khác: </div>
+                        <?php foreach($optionproduct as $key => $val) {?>
+                        <div class="col col-6"><div class="option-choose ">
+                            <div class=""><strong><?= $val['name'] ?></strong> </div>
+                            <div class=""><strong> RAM:</strong> <?= $val['ram'] ?></div>
+                            <div class=""><strong> Màu:</strong> <?= $val['color'] ?></div>
+                            <div class=""><strong> Giá:</strong> <?= number_format($val['price']) ?> đ</div>
+                        </div> 
+                        </div>
+                        <?php } ?>    
+                        <?php } ?>  
+                        
+
+                          
                     </div>
-                    <div class="row g-0 mt-3">
-                        <div class="col col-3"><div class="properties-choose">MÀU ĐỎ</div> </div>
-                        <div class="col col-3"><div class="properties-choose">MÀU GOLD</div> </div>
-                        <div class="col col-3"><div class="properties-choose">MÀU TRẮNG</div> </div>   
-                        <div class="col col-3"><div class="properties-choose">MÀU XANH</div> </div>   
-                    </div>
+                 
 
                     <ul class="info-ul mt-4">
                                     <?php if(isset($data['product']['contents']) && $data['product']['contents'] != '') {?>
@@ -251,13 +263,14 @@
 </script>
 <!-- Tab end -->
 <script>
-    function addtoCart(slug,quantity){
+    function addtoCart(slug,quantity,option){
       $.ajax({
-        url:"home/addcart",
+        url:"home/addcartDetail",
         method:"post",
         data: {
           slug:slug,
-          quantity:quantity
+          quantity:quantity,
+          option:option
         }, 
         success : function(response) { 
           $("#cart-quantity").load(" #cart-quantity");
@@ -269,7 +282,49 @@
 
 
     function addCartDetail(slug) {
-        quantity = document.querySelector(".input_value_quantity").value;
-        addtoCart(slug,quantity);
+    var quantity = document.querySelector(".input_value_quantity").value;
+    
+    var option= "NULL" ;
+    var option_choose= document.querySelectorAll(".option-choose");      
+    for(let i=0;i<option_choose.length;i++){
+        const isActive = option_choose[i].classList.contains('active-option');
+        if(isActive){
+            option = i ;
+        }
+        else{
+        console.log("no")
+
+        }
+    }
+        addtoCart(slug,quantity,option);
+        // console.log(option)
+
+        
     }
   </script>
+
+
+
+
+<!------------------------------------ Toggle option product------start---------------------->
+<script>
+    var option_choose= document.querySelectorAll(".option-choose");
+    var active_option= document.querySelectorAll(".active-option");
+
+    for(let i=0;i<option_choose.length;i++){
+        option_choose[i].onclick=()=>{  
+            const isActive = option_choose[i].classList.contains('active-option');
+            // console.log(isActive)
+
+            for(let j=0;j<option_choose.length;j++){
+                option_choose[j].classList.remove('active-option');
+            }
+            option_choose[i].classList.add('active-option');
+
+            if(isActive){
+                option_choose[i].classList.remove('active-option');
+            }
+        }
+    }  
+</script>
+<!------------------------------------ Toggle option product------end---------------------->

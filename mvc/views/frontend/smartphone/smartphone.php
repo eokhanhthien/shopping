@@ -15,7 +15,7 @@
             </div>
             <div class="col col-xl-9">
                 <div class="row g-0 sort-select-container"> 
-                    <div class="col col-xl-4">Hiển thị của 1 - 6 của 12 kết quả</div>
+                    <!-- <div class="col col-xl-4">Hiển thị của 1 - 6 của 12 kết quả</div> -->
                  
                     <div class="col col-xl-3 custom-select-sort">
                         <select class="" id="filterLowHightPrice">
@@ -31,7 +31,7 @@
         </div>
         <div class="row">
             <div class="col col-xl-3">
-                <div class="tag-category-product">Lọc theo:</div>
+                <div class="tag-category-product"><i class="fas fa-filter"></i> Lọc theo:</div>
                 <div class="filter-tag-container">
                     <div class="filter-tag"><i class="fas fa-caret-down"></i> Giá</div>               
                 </div>
@@ -85,7 +85,7 @@
 
         // console.log(radio_ele_price.value , radio_ele.value , selected)
         $.ajax({
-            url:"home/loadProduct",
+            url:"smartphone/loadProduct",
             method:"post",
             data: {
                 cateID : radio_ele.value,
@@ -107,7 +107,7 @@
         var radio_ele_price = document.querySelector('input[name="price"]:checked');
         console.log(radio_ele_price.value , radio_ele.value , selected)
         $.ajax({
-            url:"home/loadProduct",
+            url:"smartphone/loadProduct",
             method:"post",
             data: {             
                 orderby : selected,
@@ -132,7 +132,7 @@ $("#filterLowHightPrice").change(function() {
     var radio_ele_price = document.querySelector('input[name="price"]:checked');
 
     $.ajax({
-    url:"home/loadProduct",
+    url:"smartphone/loadProduct",
     method:"post",
     data: {
         orderby : selected,

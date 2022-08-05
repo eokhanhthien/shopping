@@ -131,6 +131,15 @@ require_once "./mvc/controllers/MyController.php";
                     $properties = json_encode($data_properties);
                 }
 
+                $data_option = $_POST['data_option'];
+                $option = '';
+                if(isset($data_option) && $data_option != NULL){
+                    $option = json_encode($data_option);
+                    // echo "<pre>";
+                    // print_r($option);die;
+                }
+
+
                 $slug = $this->Functions->createSlug($data_post['slug'],$type);
                 $price = str_replace(',','',$data_post['price']);
                 $data_post['price'] = $price;   
@@ -140,7 +149,8 @@ require_once "./mvc/controllers/MyController.php";
                 $data_post['publish'] ? $publish =1 : $publish=0;
                 $data_post['publish'] = $publish;
                 $data_post['properties'] = $properties;
-              
+                $data_post['optionproduct'] = $option;
+
                 $data_post['created_at'] = gmdate('Y-m-d H:i:s', time() + 7*3600);
                 // print_r($data_post);die;
                 $result  = $this-> ProductModels->add($data_post);
@@ -190,6 +200,12 @@ require_once "./mvc/controllers/MyController.php";
                 $arr_properties= json_decode($datas['properties'], true);
             }
 
+            $arr_optionproduct =[];
+            if($datas['optionproduct'] != '' && $datas['optionproduct'] != NULL){
+                $arr_optionproduct= json_decode($datas['optionproduct'], true);
+            }
+
+
             $image_folder = $datas['image'];
             $thumb_folder = $datas['thumb'];
 
@@ -224,7 +240,11 @@ require_once "./mvc/controllers/MyController.php";
                 if(isset($data_properties) && $data_properties != NULL){
                     $properties = json_encode($data_properties);
                 }
-              
+                $data_optionproduct = $_POST['data_option'];
+                $optionproduct = '';
+                if(isset($data_optionproduct) && $data_optionproduct != NULL){
+                    $optionproduct = json_encode($data_optionproduct);
+                }
 
 
                 $data_post = $_POST['data_post'];
@@ -237,6 +257,8 @@ require_once "./mvc/controllers/MyController.php";
                 $data_post['publish'] ? $publish =1 : $publish=0;
                 $data_post['publish'] = $publish;
                 $data_post['properties'] = $properties;
+                $data_post['optionproduct'] = $optionproduct;
+
                 $data_post['updated_at'] = gmdate('Y-m-d H:i:s', time() + 7*3600);
                 // print_r($data_post);die;
                 $result  = $this-> ProductModels->update($data_post, ['id' => $id]);
@@ -270,6 +292,7 @@ require_once "./mvc/controllers/MyController.php";
                 'parent'            => $parent,
                 'datas'             => $datas,
                 'arr_properties'    => $arr_properties,
+                'arr_optionproduct' => $arr_optionproduct,
                 'list_photo'        => $list_photo
             ];
          

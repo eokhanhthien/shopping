@@ -3,6 +3,7 @@ require_once "./mvc/core/redirect.php";
 $redirect = new redirect();
 
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -46,7 +47,7 @@ $redirect = new redirect();
             <form class="" action="" method="post" novalidate> 
               <div class="form-group first">
                 <!-- <label for="username">Họ và tên</label> -->
-                <input name="data_post[fullname]"  class="form-control" id="username"  type="text" placeholder="Họ và tên">
+                <input name="data_post[fullname]"  class="form-control" id="fullname"  type="text" placeholder="Họ và tên">
               </div>
 
               <div class="form-group first">
@@ -55,12 +56,16 @@ $redirect = new redirect();
               </div>
               <div class="form-group last mb-4">
                 <!-- <label for="password">Mật khẩu</label> -->
-                <input name="data_post[password]" class="form-control" id="password"  type="password" placeholder="Mật khẩu">
+                <input name="data_post[password]" onchange="checkPass()" class="form-control" id="password"  type="password" placeholder="Mật khẩu">
               </div>
-              
+              <p class="text-error">
+              <div class="form-group last mb-4">
+                <!-- <label for="password">Mật khẩu</label> -->
+                <input onchange="checkPass()" class="form-control" id="repassword"  type="password" placeholder="Nhập lại mật khẩu">
+              </div>
 
 
-              <input name="submit" type="submit" value="Đăng ký" class="btn btn-block btn-primary btn-custom-login">
+              <input id="register" name="submit" type="submit" value="Đăng ký" disabled="disabled" class="btn btn-block btn-primary btn-custom-login">
               <span class="d-block text-left my-4 text-muted">  <a class="create_account" href="authen">Bạn đã có tài khoản ?</a></span>
               
             </form>
@@ -90,5 +95,26 @@ $redirect = new redirect();
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+
+    <script src="mvc/views/frontend/bootstrap/jquery/dist/jquery.min.js"></script>
+
+    <script>
+      function checkPass(){
+            var pass = document.querySelector("#password").value;
+            var repass = document.querySelector("#repassword").value;
+            var register = document.querySelector("#register");
+            var text_error = document.querySelector(".text-error");
+            if(pass === repass){
+              register.disabled = false;
+              text_error.innerHTML = "";
+            }
+            else{
+              register.disabled = true;
+              text_error.innerHTML = "Mật khẩu chưa khớp";
+            }
+            
+          }
+   
+    </script>
   </body>
 </html>

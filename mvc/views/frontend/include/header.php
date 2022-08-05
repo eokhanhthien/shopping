@@ -17,7 +17,7 @@
                     <div class="search-header-dropdow">
                       <div class = "search-title ">SẢN PHẨM TƯƠNG TỰ</div>
                       <div class="drop-down-cart-height" id="loadSearch">
-
+                        <img src="mvc/views/frontend/images/no-products-found.png"  alt="">
                       </div>
 
 
@@ -119,7 +119,7 @@
             <div class="container-menu">
               <div class="row g-0">
                 <div class="col header-menu-text <?php if(!isset($_SERVER['PATH_INFO'])) { echo "header-menu-active";}  {echo " ";} ?>"> <a href="">TRANG CHỦ</a> </div>
-                <div class= "col header-menu-text <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/home/smartphone') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="home/smartphone">ĐIỆN THOẠI</a> </div>
+                <div class= "col header-menu-text <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/smartphone') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="smartphone">ĐIỆN THOẠI</a> </div>
                 <div class="col header-menu-text"> <a href="">MÁY TÍNH BẢNG</a> </div>
                 <div class="col header-menu-text"> <a href="">LAPTOP</a> </div>
                 <div class="col header-menu-text"> <a href="">PHỤ KIỆN</a> </div>

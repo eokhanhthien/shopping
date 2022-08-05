@@ -18,11 +18,21 @@
 
         public function index()  {
             $product = $this->ProductModels->select_array('*',['publish' => 1] ,'id desc',0,8);
+            //Lấy id điện thoại -> 62
+            $cateSmartphone= $this->sameProduct(62);
+            $Smartphone = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,0,8,'cateID',$cateSmartphone,'id', NULL ,NULL);
+            // Lấy id máy tính bảng 85->Tìm ra id cha là danh mục
+            $cateTable= $this->sameProduct(85);
+            $tablet = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,0,8,'cateID',$cateTable,'id', NULL ,NULL);
+
             // echo "<pre>";
+            // print_r( $tablet);die;
             // print_r($_SESSION['cart']);die;
             $data = [
                 'page'      => 'home/index',
                 'product'   => $product,
+                'Smartphone'=>$Smartphone,
+                'tablet'   => $tablet,
             ];
              $this->viewFrontEnd('frontend/masterlayout',$data);
          }
@@ -74,10 +84,66 @@
             
          }
 
+         function addcartDetail(){
+            // echo $_POST['quantity'];die;
+            if($_POST['option'] === "NULL"){
+                $data = $this->ProductModels->select_row('*',['slug' => $_POST['slug']]);
+                // echo "<pre>";
+                // print_r($data);
+                if($data != NULL){
+                    $cart = $this->addtoCart($data , $_POST['quantity']);
+                }
+            }else{
+            $option = $_POST['option'];
+            $data = $this->ProductModels->select_row('*',['slug' => $_POST['slug']]);
+            $arr_optionproduct =[];
+            if($data['optionproduct'] != '' && $data['optionproduct'] != NULL){
+                $arr_optionproduct= json_decode($data['optionproduct'], true);
+            }
+            if(isset($_SESSION['cart']) && array_key_exists($data['id'], $_SESSION['cart'])){ 
+                if($_SESSION['cart'][$data['id']]['name'] != $arr_optionproduct[$option]['name'] ){
+                    $datas = [
+                        'id'                => $data['id'].$arr_optionproduct[$option]['slug'],
+                        'name'              => $arr_optionproduct[$option]['name'],
+                        'price'             => $arr_optionproduct[$option]['price'],
+                        'image'             => $data['image'],
+                        'thumb'             => $data['thumb'],
+                        'slug'              => $data['slug'],
+                    ];
+                    $cart = $this->addtoCart($datas , $_POST['quantity']);
+                    
+                }
+                else{
+                      if($data != NULL){
+                           $cart = $this->addtoCart($data , $_POST['quantity']);
+                       }
+                }
+            }
+            else{
+                $datas = [
+                    'id'                => $data['id'].$arr_optionproduct[$option]['slug'],
+                    'name'              => $arr_optionproduct[$option]['name'],
+                    'price'             => $arr_optionproduct[$option]['price'],
+                    'image'             => $data['image'],
+                    'thumb'             => $data['thumb'],
+                    'slug'              => $data['slug'],
+                ];
+                $cart = $this->addtoCart($datas , $_POST['quantity']);
+            }
+           
+            // echo "<pre>";
+            // print_r($datas);
+
+
+            }
+
+            
+         }
+
          function addtoCart($array , $quantity){
             if(isset($_SESSION['cart'])){
-                if(array_key_exists($array['id'], $_SESSION['cart'])){
-                    $_SESSION['cart'][$array['id']]['qty'] += $quantity;
+                if(array_key_exists($array['id'], $_SESSION['cart'])){ 
+                    $_SESSION['cart'][$array['id']]['qty'] += $quantity;  
                 }
                 else{
                     $_SESSION['cart'][$array['id']] = $array;
@@ -105,6 +171,7 @@
         function updatecart(){
             if(isset($_POST['update'])){
                 if(isset($_SESSION["cart"])){
+                                
                     foreach($_SESSION["cart"] as $value){
                         if($_POST["quantity".$value["id"]] <= 0){
                             unset($_SESSION['cart'][$value['id']]);
@@ -112,7 +179,11 @@
                         else{
                             $_SESSION['cart'][$value['id']]["qty"] = $_POST["quantity".$value["id"]];
                         }
+                        // print_r($_POST["quantity".$value["id"]]);     
+                        $_SESSION['cart'][$value['id']]["qty"] = $_POST["quantity".$value["id"]];
+
                     }
+                    // die;
                 }
             }
             header("location: cart");
@@ -134,116 +205,119 @@
          }
 
 
-         public function smartphone(){     
-            // Lấy sản phẩm là điện thoại để đổ ra bảng tableProduct
-                $cateSame= $this->sameProduct(62);
+        //  public function smartphone(){     
+        //     // Lấy sản phẩm là điện thoại để đổ ra bảng tableProduct
+        //         $cateSame= $this->sameProduct(62);
 
-            //Lấy dữ liệu hãng cho filter
-                $brand = $this->CategoryModels->select_array('*',['publish' => 1 , 'parentID' => 61]);
-                // echo "<pre>";
-                // print_r($brand);die;
+        //     //Lấy dữ liệu hãng cho filter
+        //         $brand = $this->CategoryModels->select_array('*',['publish' => 1 , 'parentID' => 61]);
+        //         // echo "<pre>";
+        //         // print_r($brand);die;
 
                                 
-                $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
+        //         $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
                 
-                $limit = 6;
-                $page = 1;
-                $total_rows = count($rows);
-                $total_pages = ceil($total_rows / $limit);
-                $start = ($page -1) * $limit;
-                $button_pagination = $this->Functions->pagination($total_pages,$page);
+        //         $limit = 6;
+        //         $page = 1;
+        //         $total_rows = count($rows);
+        //         $total_pages = ceil($total_rows / $limit);
+        //         $start = ($page -1) * $limit;
+        //         $button_pagination = $this->Functions->pagination($total_pages,$page);
  
-                $product = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,$start,$limit,'cateID',$cateSame,'id', NULL);
+        //         $product = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,$start,$limit,'cateID',$cateSame,'id', NULL);
 
-                $data = [
-                    'page'      => 'smartphone/smartphone',
-                    'product'   => $product,
-                    'brand'     => $brand,
-                    'button_pagination' => $button_pagination,
+        //         $data = [
+        //             'page'      => 'smartphone/smartphone',
+        //             'product'   => $product,
+        //             'brand'     => $brand,
+        //             'button_pagination' => $button_pagination,
+        //             'total'     =>$total_rows
 
-                ];
-                $this->viewFrontEnd('frontend/masterlayout',$data);
+        //         ];
+        //         $this->viewFrontEnd('frontend/masterlayout',$data);
             
            
-            // ============ > Không nhận được $_POST['orderby'] bị UNDEFINE 
-            // print_r($_POST['orderby']);die;
-            // có mà ta
-            // echo "<pre></pre>";
-            // print_r($_POST['orderby']);
+        //     // ============ > Không nhận được $_POST['orderby'] bị UNDEFINE 
+        //     // print_r($_POST['orderby']);die;
+        //     // có mà ta
+        //     // echo "<pre></pre>";
+        //     // print_r($_POST['orderby']);
            
-         }
+        //  }
 
-         public function loadProduct(){
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // bỏ vào đây hả anh ?
-                // E định lấy $_POST['orderby'] gán vô để xếp giá lại 
+        //  public function loadProduct(){
+        //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //         // bỏ vào đây hả anh ?
+        //         // E định lấy $_POST['orderby'] gán vô để xếp giá lại 
                 
-                $order = $_POST['orderby'] != NULL ? 'price '.$_POST['orderby'] : ' id DESC';
-                $cateID = $_POST['cateID'] != NULL &&  $_POST['cateID'] != '' ? $_POST['cateID'] : NULL ;
-                $betweenPrice = $_POST['betweenPrice'] != NULL &&  $_POST['betweenPrice'] != "" ? $_POST['betweenPrice'] : NULL ;
+        //         $order = $_POST['orderby'] != NULL ? 'price '.$_POST['orderby'] : ' id DESC';
+        //         $cateID = $_POST['cateID'] != NULL &&  $_POST['cateID'] != '' ? $_POST['cateID'] : NULL ;
+        //         $betweenPrice = $_POST['betweenPrice'] != NULL &&  $_POST['betweenPrice'] != "" ? $_POST['betweenPrice'] : NULL ;
 
-                $cateSame= $this->sameProduct(62);
+        //         $cateSame= $this->sameProduct(62);
                 
 
-                $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
+        //         $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
                 
-                $limit = 6;
-                $page = isset($_POST['page'])?$_POST['page']:1;
-                $total_rows = count($rows);
-                $total_pages = ceil($total_rows / $limit);
-                $start = ($page -1) * $limit;
-                $button_pagination = $this->Functions->pagination($total_pages,$page);
+        //         $limit = 6;
+        //         $page = isset($_POST['page'])?$_POST['page']:1;
+        //         $total_rows = count($rows);
+        //         $total_pages = ceil($total_rows / $limit);
+        //         $start = ($page -1) * $limit;
+        //         $button_pagination = $this->Functions->pagination($total_pages,$page);
 
-                if($cateID == 'ALL'){
-                    $product = $this->ProductModels->select_array('*',['publish' => 1 ],$order ,$start,$limit,'cateID',$cateSame,'id', NULL,$betweenPrice);
+        //         if($cateID == 'ALL'){
+        //             $product = $this->ProductModels->select_array('*',['publish' => 1 ],$order ,$start,$limit,'cateID',$cateSame,'id', NULL,$betweenPrice);
 
-                    //Phân trang lại
-                    $rows = $this->ProductModels->select_array('*',['publish' => 1 ],$order ,$start,NULL,'cateID',$cateSame,'id', NULL,$betweenPrice);
-                    $total_rows = count($rows);
-                    $total_pages = ceil($total_rows / $limit);
-                    $button_pagination = $this->Functions->pagination($total_pages,$page);
-                }
-                else{
-                    $product = $this->ProductModels->select_array('*',['publish' => 1 , 'cateID' => $cateID],$order ,$start,$limit,'cateID',$cateSame,'id', NULL,$betweenPrice);
+        //             //Phân trang lại
+        //             $rows = $this->ProductModels->select_array('*',['publish' => 1 ],$order ,$start,NULL,'cateID',$cateSame,'id', NULL,$betweenPrice);
+        //             $total_rows = count($rows);
+        //             $total_pages = ceil($total_rows / $limit);
+        //             $button_pagination = $this->Functions->pagination($total_pages,$page);
+        //         }
+        //         else{
+        //             $product = $this->ProductModels->select_array('*',['publish' => 1 , 'cateID' => $cateID],$order ,$start,$limit,'cateID',$cateSame,'id', NULL,$betweenPrice);
                     
-                    //Phân trang lại
-                    $rows = $this->ProductModels->select_array('*',['publish' => 1 ,'cateID' => $cateID],$order ,$start,NULL,'cateID',$cateSame,'id', NULL,$betweenPrice);
-                    $total_rows = count($rows);
-                    $total_pages = ceil($total_rows / $limit);
-                    $button_pagination = $this->Functions->pagination($total_pages,$page);
-                }
+        //             //Phân trang lại
+        //             $rows = $this->ProductModels->select_array('*',['publish' => 1 ,'cateID' => $cateID],$order ,$start,NULL,'cateID',$cateSame,'id', NULL,$betweenPrice);
+        //             $total_rows = count($rows);
+        //             $total_pages = ceil($total_rows / $limit);
+        //             $button_pagination = $this->Functions->pagination($total_pages,$page);
+        //         }
                 
-                $data = [
-                    'page'      => 'smartphone/smartphone',
-                    'product'   => $product,
-                    'button_pagination' => $button_pagination,
+        //         $data = [
+        //             'page'      => 'smartphone/smartphone',
+        //             'product'   => $product,
+        //             'button_pagination' => $button_pagination,
+        //             'total'     =>$total_rows
 
-                ];
-                $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
-            }
-            else{
-                $cateSame= $this->sameProduct(62);
+        //         ];
+        //         $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
+        //     }
+        //     else{
+        //         $cateSame= $this->sameProduct(62);
                 
-                $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
+        //         $rows = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,NULL,NULL,'cateID',$cateSame,'id', NULL ,NULL);
                 
-                $limit = 6;
-                $page = $_POST['page']?$_POST['page']:1;
-                $total_rows = count($rows);
-                $total_pages = ceil($total_rows / $limit);
-                $start = ($page -1) * $limit;
-                $button_pagination = $this->Functions->pagination($total_pages,$page);
+        //         $limit = 6;
+        //         $page = $_POST['page']?$_POST['page']:1;
+        //         $total_rows = count($rows);
+        //         $total_pages = ceil($total_rows / $limit);
+        //         $start = ($page -1) * $limit;
+        //         $button_pagination = $this->Functions->pagination($total_pages,$page);
 
-                $product = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,$start,$limit,'cateID',$cateSame,'id', NULL ,NULL);
+        //         $product = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,$start,$limit,'cateID',$cateSame,'id', NULL ,NULL);
 
-                $data = [
-                    'page'      => 'smartphone/smartphone',
-                    'product'   => $product,
-                    'button_pagination' => $button_pagination,
+        //         $data = [
+        //             'page'      => 'smartphone/smartphone',
+        //             'product'   => $product,
+        //             'button_pagination' => $button_pagination,
+        //             'total'     => $total_rows
 
-                ];
-                $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
-            }
-         }
+        //         ];
+        //         $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
+        //     }
+        //  }
 
          function search(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -252,7 +326,8 @@
                 $sql .= "SELECT * FROM `tbl_product` WHERE name like" ." ".'"%'.$seach_name.'%"';
                 $product = $this->ProductModels->query($sql);
                 $output = "";
-                foreach($product as $val){
+                if($seach_name != "" && count($product) > 0 ){
+                    foreach($product as $val){
                     $output .= '<div class="row g-0 cart-header-item">
                     <div class="col col-xl-3">
                     <div class="img-size-search">
@@ -263,7 +338,12 @@
                     <div class="col col-xl-2"><i class="fas fa-cart-plus"></i> </div>
                     </div>';
                     
+                 }}
+                 else{
+                    $output .= '<img src="mvc/views/frontend/images/no-products-found.png"  alt="">';
                  }
+                
+
                 
                 echo $output;
                 

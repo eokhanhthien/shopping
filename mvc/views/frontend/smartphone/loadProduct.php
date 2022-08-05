@@ -1,4 +1,4 @@
-
+<div class="col col-xl-4">Tìm thấy <strong><?= $data['total'] ?></strong>  sản phẩm</div>
 <div class="row ">
 
 <?php if(isset($data['product']) && $data['product'] != NULL) {?>
@@ -13,7 +13,13 @@
         <a href="javascript:void(0)" ><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>
     </div>
 <?php } ?>
-<?php } ?>
+<?php }else{ ?>
+  <div class="img-no-product">
+    <img src="mvc/views/frontend/images/noproduct.jpg" alt="">
+    <div class="tag-category-product">Không tìm thấy sản phẩm nào</div>
+  </div>
+  
+  <?php } ?>
 
 </div>
       <div class="center-pagination">
@@ -38,7 +44,7 @@
                 cateID : radio_ele.value,
                 betweenPrice : radio_ele_price.value,
 			}
-			callback('home/loadProduct',data);
+			callback('smartphone/loadProduct',data);
 		})
 
 			function callback(url,data) {

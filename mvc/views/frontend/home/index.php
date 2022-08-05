@@ -1,3 +1,5 @@
+<!-- css swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
 <div class="Content">
     <div class="Content-banner">
@@ -32,7 +34,7 @@
                   <img src="mvc/views/frontend/images/phone2.jpg" alt="">
               </div>
               <div class="text-main-product">
-                <p>MÁY TÍNH BẢNG</p>
+                <p>LAPTOP</p>
                 <p>Giảm  10%</p>
               </div>
             </a>
@@ -56,7 +58,7 @@
 
       <div class="product-selling-title mt-40 mb-40">
         <hr>
-        <span >SẢN PHẨM NỔI BẬT</span>
+        <span >SẢN PHẨM MỚI NHẤT</span>
         <hr>
      </div>
   
@@ -79,15 +81,16 @@
 
      <div class="product-selling-title mt-40 mb-40">
         <hr>
-        <span>GIẢM GIÁ SỐC</span>
+        <span>ĐIỆN THOẠI</span>
         <hr>
      </div>
 
      
-     <div class="row">
-      <?php if(isset($data['product']) && $data['product'] != NULL) { ?>
-        <?php foreach($data['product'] as $key => $val) {?>
-              <div class="col col-xxl-3 product-item">
+        <div class="swiper">
+        <div class="swiper-wrapper">
+        <?php if(isset($data['Smartphone']) && $data['Smartphone'] != NULL) { ?>
+        <?php foreach($data['Smartphone'] as $key => $val) {?>
+            <div class="swiper-slide">
                   <div class="thumbnail-avt-product">
                      <a href="home/detail/<?= $val['slug'] ?>"><img src="<?= $val['image'] ?>" alt=""></a> 
                       <div class="tab-detail-product">CHI TIẾT</div>
@@ -95,10 +98,42 @@
                   <div class="thumbnail-name-product"><?= $val['name'] ?></div>
                   <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
                   <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>              
-                </div>
-        <?php } ?>
-      <?php } ?>
+              </div>
+          <?php } ?>
+          <?php } ?>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+
+
+      <div class="product-selling-title mt-40 mb-40">
+        <hr>
+        <span>MÁY TÍNH BẢNG</span>
+        <hr>
      </div>
+        <div class="swiper">
+        <div class="swiper-wrapper">
+        <?php if(isset($data['tablet']) && $data['tablet'] != NULL) { ?>
+        <?php foreach($data['tablet'] as $key => $val) {?>
+            <div class="swiper-slide">
+                  <div class="thumbnail-avt-product">
+                     <a href="home/detail/<?= $val['slug'] ?>"><img src="<?= $val['image'] ?>" alt=""></a> 
+                      <div class="tab-detail-product">CHI TIẾT</div>
+                  </div>
+                  <div class="thumbnail-name-product"><?= $val['name'] ?></div>
+                  <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
+                  <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>              
+              </div>
+          <?php } ?>
+          <?php } ?>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+
+     
+   
 
      <div class="row mt-60 mb-60">
       <div class="col col-xxl-4 deliver-container">
@@ -148,3 +183,31 @@
     })
     }
   </script>
+
+
+<!-- Swiper ----start------------------------------------------------------------ -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.swiper', {
+    slidesPerView: 4,
+    direction: getDirection(),
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    on: {
+      resize: function () {
+        swiper.changeDirection(getDirection());
+      },
+    },
+  });
+
+  function getDirection() {
+    var windowWidth = window.innerWidth;
+    var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
+
+    return direction;
+  }
+</script>
+<!-- Swiper ----end------------------------------------------------------------ -->

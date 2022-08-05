@@ -12,6 +12,18 @@
     width: 100%;
 }
 
+
+.item_option {
+    padding: 24px;
+    background-color: #ededed;
+    margin: 10px 0 20px 0;
+}
+.number-option.col-12 {
+    color: blue;
+    font-size: 17px;
+    font-weight: 600;
+}
+
 </style>
 <div class="">
                     <div class="page-title">
@@ -145,7 +157,48 @@
                                                 </div>
                                            </div>
 
+                                           <div class="form-group col-6">         
+                                            <a href="javascript:void(0)" onclick="createOption()" class="btn btn-primary">Thêm Option</a>
+                                            <div id="multi_option">
+                                                
+                                            <?php if(isset($data['arr_optionproduct']) && $data['arr_optionproduct'] != NULL) { ?>
+                                                    <?php foreach($data['arr_optionproduct'] as $key => $val ){ ?>
 
+                                                <div class="row item_option">
+                                                    <div class="number-option col-12">Option : <?= $key + 1?></div>
+                                                    <div class="col-5">
+                                                        <label for="">Tên sản phẩm</label>
+                                                        <input onkeyup="removeAccentsOption()" type="text" class="form-control nameOption" value = "<?= $val['name'] ?>" name="data_option[<?= $key ?>][name]" >
+                                                        <input type="hidden" name="data_option[<?= $key ?>][slug]" class="slugOption" value = "<?= $val['slug'] ?>">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Màu</label>
+                                                        <input type="text" class="form-control"   value = "<?= $val['color'] ?>" name="data_option[<?= $key ?>][color]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Dung lượng</label>
+                                                        <input type="text" class="form-control"   value = "<?= $val['memory'] ?>" name="data_option[<?= $key ?>][memory]">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <label for="">RAM</label>
+                                                        <input type="text" class="form-control"   value = "<?= $val['ram'] ?>" name="data_option[<?= $key ?>][ram]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Giá</label>
+                                                        <input type="text" class="form-control"   value = "<?= $val['price'] ?>" name="data_option[<?= $key ?>][price]">
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <label for="">&nbsp;</label>
+                                                        <a href="javascript:void(0)" onclick="delete_Option(this)" class="btn btn-danger d-block">Xóa</a>
+                                                    </div>
+                                                </div>
+                                                <?php } ?>    
+                                                <?php } ?>  
+                                            </div>
+                                        </div>
 
                                            <div class="col-12">
                                                 <div class="form-group">
@@ -199,9 +252,40 @@ function removeAccents(str) {
             substr = substr.replace(re, char);
             substr = substr.replace(/\s/g,'-');
         }
-        document.querySelector('#slug').value = substr;
+        document.querySelector("#slug").value = substr;
     }
 
+    function removeAccentsOption() {
+        var slugOption =  document.querySelectorAll(".slugOption");
+        var nameOption =  document.querySelectorAll(".nameOption");
+        for(let i=0 ; i < nameOption.length ; i++){
+            let substr = nameOption[i].value;
+            var AccentsMap = [
+                "aàảãáạăằẳẵắặâầẩẫấậ",
+                "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+                "dđ", "DĐ",
+                "eèẻẽéẹêềểễếệ",
+                "EÈẺẼÉẸÊỀỂỄẾỆ",
+                "iìỉĩíị",
+                "IÌỈĨÍỊ",
+                "oòỏõóọôồổỗốộơờởỡớợ",
+                "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+                "uùủũúụưừửữứự",
+                "UÙỦŨÚỤƯỪỬỮỨỰ",
+                "yỳỷỹýỵ",
+                "YỲỶỸÝỴ",
+                " .:/@#<>%^*()",
+            ];
+            for (var j=0; j<AccentsMap.length; j++) {
+                var re = new RegExp('[' + AccentsMap[j].substr(1) + ']', 'g');
+                var char = AccentsMap[j][0];
+                substr = substr.replace(re, char);
+                substr = substr.replace(/\s/g,'-');
+            }
+            slugOption[i].value = substr;
+        }
+    }
+    
 function formatMoney(__this){
     let val = __this.value;
     let num = val.replace(/[^\d.]/g,"");
@@ -309,5 +393,49 @@ function delete_photo(__this,id){
 }
 
 
+function createOption(){
+    let count_items = document.querySelectorAll(".item_option").length -1;
+    count_items++;
+    $('#multi_option').append(`
+    <div class="row item_option">
+        <div class="number-option col-12">Option : ${count_items + 1}</div>
+                                                    <div class="col-5">
+                                                    
+                                                        <label for="">Tên sản phẩm</label>
+                                                        <input onkeyup="removeAccentsOption()" type="text" class="form-control nameOption" name="data_option[${count_items}][name]" >
+                                                        <input type="hidden" name="data_option[${count_items}][slug]" class="slugOption">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Màu</label>
+                                                        <input type="text" class="form-control" name="data_option[${count_items}][color]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Dung lượng</label>
+                                                        <input type="text" class="form-control" name="data_option[${count_items}][memory]">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <label for="">RAM</label>
+                                                        <input type="text" class="form-control" name="data_option[${count_items}][ram]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Giá</label>
+                                                        <input type="text" class="form-control" name="data_option[${count_items}][price]">
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <label for="">&nbsp;</label>
+                                                        <a href="javascript:void(0)" onclick="delete_Option(this)" class="btn btn-danger d-block">Xóa</a>
+                                                    </div>
+                                                </div>
+    `);
+}
+
+function delete_Option(__this){
+    let count_items = document.querySelectorAll(".item_option").length -1;
+    count_items--;
+    $(__this).closest('.item_option').remove();
+}
 
 </script>
