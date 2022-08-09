@@ -17,7 +17,7 @@
     <div class="Container-app mt-60">
       <div class="row" id="product-hot">
         <div class="col col-xxl-4 nav-main-product">
-              <a  href="">
+              <a  href="smartphone">
               <div class="img-main-product">
                   <img src="mvc/views/frontend/images/phone.jpg" alt="">
               </div>

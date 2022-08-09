@@ -8,6 +8,7 @@ require_once "./mvc/controllers/MyController.php";
     // Load Models
         public $CategoryModels;
         public $ProductModels;
+        public $ProductDetailModels;
         public $SlugModels;
         public $PhotoModels;
 
@@ -37,6 +38,7 @@ require_once "./mvc/controllers/MyController.php";
             //Chứa biến $this->table -> tên bảng 
             $this->CategoryModels   = $this->models('CategoryModels');
             $this->ProductModels    = $this->models('ProductModels');
+            $this->ProductDetailModels    = $this->models('ProductDetailModels');
             $this->SlugModels       = $this->models('SlugModels');
             $this->PhotoModels       = $this->models('PhotoModels');
             $this->MyController     = new MyController();
@@ -164,6 +166,11 @@ require_once "./mvc/controllers/MyController.php";
                     }
                 }
 
+                $data_detail_product = $_POST['data_detail_product'];
+                $data_detail_product['id_product'] = $return['id'];
+                $data_detail_product['cateID'] = $data_post['cateID'];
+                $this-> ProductDetailModels->add($data_detail_product);
+
 
                 if($return['type'] == "SuccessFully"){
                     $redirect = new redirect($this->template.'/'.'index');
@@ -192,6 +199,9 @@ require_once "./mvc/controllers/MyController.php";
          public function edit($id){
             $data_admin = $this->MyController->getIndexAdmin();
             $datas = $this->ProductModels->select_row('*',['id' => $id]);
+            $data_product_detail = $this->ProductDetailModels->select_row('*',['id_product' => $id]);
+            // echo "<pre>";print_r( $data_product_detail);die;
+
             // danh sách ảnh chi tiết
             $list_photo = $this->PhotoModels->select_array('*',['productID' => $id]);
 
@@ -272,6 +282,17 @@ require_once "./mvc/controllers/MyController.php";
                     }
                 }
 
+                $data_detail_product = $_POST['data_detail_product'];
+                $data_detail_product['id_product'] = $id;
+                $data_detail_product['cateID'] = $data_post['cateID'];
+                if(isset($data_product_detail) && $data_product_detail != NULL){
+                   $this-> ProductDetailModels->update($data_detail_product, ['id_product' => $id]); 
+                }
+                else{
+                    $this-> ProductDetailModels->add($data_detail_product);
+                }
+                
+
                 if($return['type'] == "SuccessFully"){
                     $redirect = new redirect($this->template.'/'.'index');
                     $redirect->setFlash('flash', 'Cập nhật thành công sản phẩm');
@@ -293,6 +314,7 @@ require_once "./mvc/controllers/MyController.php";
                 'datas'             => $datas,
                 'arr_properties'    => $arr_properties,
                 'arr_optionproduct' => $arr_optionproduct,
+                'data_product_detail'   => $data_product_detail,
                 'list_photo'        => $list_photo
             ];
          
@@ -312,6 +334,7 @@ require_once "./mvc/controllers/MyController.php";
             }
             $result  = $this-> ProductModels->delete(['id' => $id ]);
             $this->SlugModels->delete(['name' => $datas['slug']]);
+            $this-> ProductDetailModels->delete(['id_product' => $id ]);
             $return = json_decode($result,true);
             if($return['type'] == "SuccessFully"){
                 // header("location:".$this->template."/index");

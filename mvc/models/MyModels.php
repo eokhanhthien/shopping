@@ -10,7 +10,9 @@ class MyModels extends Database{
     $array_where_in = NULL,
     $fields_not_in = NULL, 
     $array_where_not_in = NULL,
-    $filter = NULL
+    $filter = NULL,
+    $key_like = NULL,
+    $keyword_like = NULL
     ){
         $sql = "SELECT $data FROM $this->table";
         if(isset($where) && $where != NULL){
@@ -28,7 +30,11 @@ class MyModels extends Database{
                 $isFields = false;
                 $sql .= " ".$stringWhere." ".$fields[$i]." = ?";
             }
-            // echo $sql;die;
+            // echo $sql;
+            if($key_like != NULL && $keyword_like != NULL){
+                $sql .= ' '.$this->like_keyword($key_like , $keyword_like, true).' ';
+            }
+            // echo $sql;
 
             if($filter != '' && $filter != NULL){
                 $sql .= " ".$filter." " ; 
@@ -50,7 +56,16 @@ class MyModels extends Database{
             $query->execute($values);
         }
         else{
-            
+            // Cái like_keyword false --> có where rồi nên 2 thằng sau true để thêm and --> sau này chỉnh lại
+            if($key_like != NULL && $keyword_like != NULL){
+                $sql .= ' '.$this->like_keyword($key_like , $keyword_like, false).' ';
+            }
+            if($fields_in != NULL && $array_where_in != NULL){
+                $sql .= ' '.$this->where_in($fields_in , $array_where_in,true).' ';
+            }
+            if($fields_not_in != NULL && $array_where_not_in != NULL){
+                $sql .= ' '.$this->where_not_in($fields_not_in , $array_where_not_in,true).' ';
+            }
             if($orderby !='' && $orderby != NULL){
                 $sql .= " ORDER BY ".$orderby."";
             }
@@ -372,6 +387,18 @@ class MyModels extends Database{
                 $string_where = ' and '; 
             }
             $qr .= $string_where.' '.$fields.'  in ('.$values.')';
+        }
+        return $qr;
+    }
+
+    function like_keyword($key_like = NULL , $keyword_like = NULL, $is_where = false){
+        $qr = '';
+        $string_where = ' where ';
+        if($key_like != NULL && $keyword_like != NULL){
+            if($is_where == true){
+                $string_where = ' and '; 
+            }
+            $qr .= $string_where.' '.$key_like.' like ' .'"'.$keyword_like.'"';
         }
         return $qr;
     }

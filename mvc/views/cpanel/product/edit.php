@@ -1,4 +1,3 @@
-
 <script src='public/cpanel/ckeditor/ckeditor.js'> </script>
 <script src='public/cpanel/ckfinder/ckfinder.js'> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
@@ -17,13 +16,24 @@
     padding: 24px;
     background-color: #ededed;
     margin: 10px 0 20px 0;
+    border-radius: 16px;
 }
 .number-option.col-12 {
     color: blue;
     font-size: 17px;
     font-weight: 600;
 }
+label {
+    margin: 10px 0 0px 0 !important;
+    color: #333;
+}
 
+.item_detail_product {
+    padding: 24px;
+    background-color: #a7caef54;
+    margin: 10px 0 20px 0;
+    border-radius: 16px;
+}
 </style>
 <div class="">
                     <div class="page-title">
@@ -199,6 +209,61 @@
                                                 <?php } ?>  
                                             </div>
                                         </div>
+                                        </div>
+
+                                        <div class="row">
+                                        <div class="form-group col-6">      
+                                        <?php if(isset($data['data_product_detail']) && $data['data_product_detail'] != NULL) { ?>   
+                                               <div class="row item_detail_product">
+                                                    <div class="number-option col-12">Thông tin chi tiết</div>
+                                                  
+                                                    <div class="col-5">
+                                                        <label for="">RAM</label>
+                                                        <input type="text" class="form-control" placeholder="VD: 4, 6, 8, 12, 16 ..." value="<?=$data['data_product_detail']['ram'] ?>" name="data_detail_product[ram]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Dung lượng</label>
+                                                        <input type="text" class="form-control" placeholder="VD: 64, 128, 256 ..." value="<?=$data['data_product_detail']['memory'] ?>" name="data_detail_product[memory]">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <label for="">Tình trạng</label>
+                                                        <input type="text" class="form-control" placeholder="VD: new hoặc old " value="<?=$data['data_product_detail']['status'] ?>" name="data_detail_product[status]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Nhu cầu</label>
+                                                        <input type="text" class="form-control" placeholder="VD: office, code, gaming" value="<?=$data['data_product_detail']['demand'] ?>" name="data_detail_product[demand]">
+                                                    </div>
+
+                                                </div>    
+                                         <?php }else{?>
+                                            <div class="row item_detail_product">
+                                                    <div class="number-option col-12">Thông tin chi tiết</div>
+                                                  
+                                                    <div class="col-5">
+                                                        <label for="">RAM</label>
+                                                        <input type="text" class="form-control" placeholder="VD: 4, 6, 8, 12, 16 ..."   name="data_detail_product[ram]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Dung lượng</label>
+                                                        <input type="text" class="form-control" placeholder="VD: 64, 128, 256 ..."  name="data_detail_product[memory]">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <label for="">Tình trạng</label>
+                                                        <input type="text" class="form-control" placeholder="VD: new hoặc old "  name="data_detail_product[status]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Nhu cầu</label>
+                                                        <input type="text" class="form-control" placeholder="VD: office, code, gaming" name="data_detail_product[demand]">
+                                                    </div>
+
+                                                </div>   
+                                        <?php } ?>
+                                        </div>
+                                        </div>
 
                                            <div class="col-12">
                                                 <div class="form-group">
@@ -220,7 +285,7 @@
                                                    <button name="submit" type="submit" class ="btn btn-primary">Sửa</button>
                                                 </div>
                                            </div>
-                                       </div>
+                                      
                                     </form>    
                     </div>
 </div>

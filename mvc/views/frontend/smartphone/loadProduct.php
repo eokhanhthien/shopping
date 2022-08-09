@@ -9,7 +9,7 @@
         <div class="tab-detail-product">CHI TIẾT</div>
         </div>
         <div class="thumbnail-name-product"><?= $val['name'] ?></div>
-        <div class="thumbnail-price-product"><?=number_format( $val['price'] ) ?>đ</div>
+        <div class="thumbnail-price-product"><?=number_format( $val['price'] ) ?>₫</div>
         <a href="javascript:void(0)" ><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>
     </div>
 <?php } ?>

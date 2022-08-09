@@ -352,7 +352,7 @@ body::-webkit-scrollbar-thumb
 
 .product-item{
     text-align: center;
-    margin-bottom: 40px;
+    padding: 26px 0;
     animation: appear 0.5s forwards;
    
 }
@@ -971,7 +971,12 @@ input.input_value_quantity::-webkit-inner-spin-button {
     font-weight: 600;
     cursor: pointer;
     background-color: #fbfbfb;
+    color: #3a3a3a;
 }
+.filter-tag:hover {
+    color: #425bca;
+}
+
 .filter-option {
     border: 1px solid #ccc;
     padding: 5px;
@@ -1061,3 +1066,8 @@ input.input_value_quantity::-webkit-inner-spin-button {
     object-fit: contain !important;
 }
 /* Custom CSS Swiper-------------------------------end----------------------------- */
+
+.img-symbon{
+    width: 30px;
+    margin: 0 0px 0 10px;
+}

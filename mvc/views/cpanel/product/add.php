@@ -11,13 +11,24 @@
     padding: 24px;
     background-color: #ededed;
     margin: 10px 0 20px 0;
+    border-radius: 16px;
 }
 .number-option.col-12 {
     color: blue;
     font-size: 17px;
     font-weight: 600;
 }
+label {
+    margin: 10px 0 0px 0 !important;
+    color: #333;
+}
 
+.item_detail_product {
+    padding: 24px;
+    background-color: #a7caef54;
+    margin: 10px 0 20px 0;
+    border-radius: 16px;
+}
 </style>
 <div class="">
                     <div class="page-title">
@@ -157,7 +168,34 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </div>
 
+                                        <div class="row">
+                                        <div class="form-group col-6">         
+                                               <div class="row item_detail_product">
+                                                    <div class="number-option col-12">Thông tin chi tiết</div>
+
+                                                    <div class="col-5">
+                                                        <label for="">RAM</label>
+                                                        <input type="text" class="form-control" placeholder="VD: 4, 6, 8, 12, 16 ..." name="data_detail_product[ram]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Dung lượng</label>
+                                                        <input type="text" class="form-control" placeholder="VD: 64, 128, 256 ..." name="data_detail_product[memory]">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <label for="">Tình trạng</label>
+                                                        <input type="text" class="form-control" placeholder="VD: new hoặc old " name="data_detail_product[status]">
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label for="">Nhu cầu</label>
+                                                        <input type="text" class="form-control" placeholder="VD: office, code, gaming" name="data_detail_product[demand]">
+                                                    </div>
+                                                </div>        
+                                        </div>
+                                        </div>
 
                                            <div class="col-12">
                                                 <div class="form-group">
@@ -179,7 +217,7 @@
                                                    <button name="submit" type="submit" class ="btn btn-primary">Thêm mới</button>
                                                 </div>
                                            </div>
-                                       </div>
+                                      
                                     </form>    
                     </div>
 </div>
