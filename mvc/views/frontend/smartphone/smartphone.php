@@ -43,7 +43,7 @@
                             <div class="filter-option"><input type="radio" name="price" value=" and price BETWEEN 0 AND 5000000" id="" > Dưới 5 triệu</div>
                             <div class="filter-option"><input type="radio" name="price" value=" and price BETWEEN 5000000 AND 10000000" id=""> Từ 5 - 10 triệu </div> 
                             <div class="filter-option"><input type="radio" name="price" value=" and price BETWEEN 10000000 AND 15000000" id=""> Từ 10 - 15 triệu </div> 
-                            <div class="filter-option"><input type="radio" name="price" value=" and price > 15000000" id=""> trên 15 triệu </div> 
+                            <div class="filter-option"><input type="radio" name="price" value=" and price > 15000000" id=""> Trên 15 triệu </div> 
                     </div>   
                 </div>
 

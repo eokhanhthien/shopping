@@ -1,6 +1,9 @@
 <?php 
-    // echo "<pre>";
-    // print_r($_SESSION['cart']);die;
+require_once "./mvc/core/redirect.php";
+$redirect = new redirect();
+
+// echo "<pre>";
+// print_r($_SESSION['coupon']);die;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,16 +113,51 @@
                 <div class="col col-12"> <div class="border-custom-pay"></div> </div>
             </div>
 
+            <form action='coupon/check_coupon' method="post">
             <div class="row">
                 <div class="col col-6"><i class="fas fa-tag sale-icon "></i> <span class="price-custom-text">Phiếu ưu đãi</span> </div>
                 <div class="col col-12"> <div class="border-custom-cart"></div> </div>
-                <div class="col col-12"> <input type="text" placeholder ="Nhập mã ưu đãi" class="input-sale"> </div>
-                <div class="col col-12"> <button onclick="voucher(<?=$totalMoney?> )" class = "btn-apply-code-sale">Áp dụng</button> </div>
-                
+                <div class="col col-12"> <input type="text" value="<?= isset($_SESSION['coupon'])?$_SESSION['coupon']['coupon_code'] : ''  ?>" placeholder ="Nhập mã ưu đãi" name="coupon" class="input-sale"> </div>
+                <?php if(isset($_SESSION['coupon']) && $_SESSION['coupon'] != NULL) {?>
+                <div class="col col-12"> <a class="btn-cancel-code-sale-a" href="coupon/cancel_coupon" ><div class = "btn-cancel-code-sale">Hủy mã giảm giá</div></a> </div>       
+                <?php }else{?>
+                <div class="col col-12"> <button type="submit" name="check_coupon" class = "btn-apply-code-sale">Áp dụng</button> </div>     
+                <?php }?>
+
             </div>
+            </form>
+
+                <?php if(isset($_SESSION['flash'])) {?>
+                    <p class="text-success"> <?= $redirect->setFlash('flash'); ?> </p>
+                <?php }?>
+                <?php if(isset($_SESSION['errors'])) {?>
+                    <p class="text-danger"> <?= $redirect->setFlash('errors'); ?> </p>
+                <?php }?>
+
             <div class="row">
-                <div class="col col-6"><span class="price-custom-text">Tổng tiền:</span> </div>
-                <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?= number_format($totalMoney+20000) ;?>đ</span> </div>
+                    <div class="col col-6"><span class="price-custom-text">Tổng tiền:</span> </div>
+                    <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?= number_format($totalMoney+20000) ;?>đ</span> </div>
+                <?php if(isset($_SESSION['coupon']) && $_SESSION['coupon'] != NULL) {?>
+                    
+                    <?php if($_SESSION['coupon']['coupon_condition'] == 1) {?>
+                        <?php 
+                            $total_coupon = ($totalMoney*$_SESSION['coupon']['coupon_number'])/100;
+                        ?>
+                        <div class="col col-6"><span class="price-custom-text">Mã giảm:</span> </div>
+                        <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?=$_SESSION['coupon']['coupon_number'] ?>% </span> </div>
+                        <div class="col col-6"><span class="price-custom-text">Tổng tiền đã giảm:</span> </div>
+                        <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?= number_format(($totalMoney-$total_coupon)+20000) ;?>đ </span> </div>
+                    <?php }else{?>
+                        <?php 
+                            $total_coupon = $_SESSION['coupon']['coupon_number'];
+                        ?>
+                        <div class="col col-6"><span class="price-custom-text">Mã giảm:</span> </div>
+                        <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?=number_format($_SESSION['coupon']['coupon_number']) ?>đ</span> </div>
+                        <div class="col col-6"><span class="price-custom-text">Tổng tiền đã giảm:</span> </div>
+                        <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?= number_format(($totalMoney-$total_coupon)+20000) ;?>đ </span> </div>
+                        <?php }?>
+                   
+                <?php }?>
                 <div class="col col-12"> <button onclick="handelPayment()" class = "pay-product">TIẾN HÀNH THANH TOÁN</button> </div>
             </div>
      </div>
@@ -145,24 +183,12 @@
     function handelPayment(){
         var isLogin = <?php echo isset($_SESSION['user'])?'true':'false'; ?>;
         if(isLogin){
-            alert("Đã đăng nhập");
+            // alert("Đã đăng nhập");
+            window.location.href = "http://localhost/shopping/payment";
         }
         else{
             alert("Hãy đăng nhập để tiến hành thanh toán");
             window.location.href = "http://localhost/shopping/authen";
         }
-    }
-
-    function voucher(money){
-        var code = document.querySelector('.input-sale').value;
-        var price  = document.querySelector('#final-price');
-        var money;
-        if(code === "eodeptrai"){
-            money = money - money*(10/100);
-            console.log(money);
-            console.log(price);
-     
-        }
-
     }
 </script>
