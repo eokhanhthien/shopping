@@ -14,6 +14,13 @@ require_once "./mvc/core/redirect.php";
         }
 
         function index(){
+            if(!isset($_SESSION['admin']) && $_SESSION['admin'] == NULL){
+                // $id_user=$_SESSION['admin']['id'];
+                // $data_info_admin = $this->AdminModels->select_row('*',['id' => $id_user]);
+                $redirect = new redirect('auth/index');
+
+            }
+            
             $data_admin = $this->MyController->getIndexAdmin();
             $data = $this->CouponModels->select_array('*');
             $data = [
