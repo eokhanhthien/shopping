@@ -1142,4 +1142,10 @@ input.input_value_quantity::-webkit-inner-spin-button {
     color: white;
     font-weight: 600;
 }
-
+.filter_container_parent {
+    position: relative;
+}
+.filter_container {
+    position: sticky;
+    top: 156px;
+}

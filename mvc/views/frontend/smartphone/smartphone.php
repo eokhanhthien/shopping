@@ -31,7 +31,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col col-xl-3">
+            <div class="col col-xl-3 filter_container_parent">
+                <div class="filter_container">
                 <div class="tag-category-product"><i class="fas fa-filter"></i> Lọc theo:</div>
 
                 <div class="group_filter">
@@ -106,7 +107,7 @@
                 </div>
                 
 
-            </div>
+                </div></div>
             <div id="loadProduct" class="col col-xl-9">
                 <?php require_once "mvc/views/frontend/smartphone/loadProduct.php" ?>
 
