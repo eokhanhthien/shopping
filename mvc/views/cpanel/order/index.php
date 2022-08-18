@@ -47,6 +47,8 @@ $redirect = new redirect();
         <th class="column-title">STT </th>
         <th class="column-title">Mã đơn hàng </th>
         <th class="column-title">Tình trạng đơn </th>
+        <th class="column-title">Ngày đặt hàng </th>
+        <th class="column-title">Ngày xác nhận đơn </th>
         <th class="column-title no-link last"><span class="nobr">Action</span></th>
       </tr>
     </thead>
@@ -57,7 +59,9 @@ $redirect = new redirect();
               <tr class="even pointer">
                   <td><?= $key+1 ?></td>
                   <td><?= $val['order_code']?></td>
-                  <td><?= $val['order_status']==1 ? 'Đơn mới <img class="img-symbon" src="mvc/views/frontend/images/new.png" alt="">' : 'Đã xử lý'  ?></td>
+                  <td><?= $val['order_status']==1 ? 'Đơn mới <img class="img-symbon" src="mvc/views/frontend/images/new.png" alt="">' : 'Đã xử lý <img class="img-symbon" src="mvc/views/frontend/images/check-mark.png" alt="">'  ?></td>
+                  <td><?= date('d/m/Y' , strtotime($val['created_at'])) ?></td>
+                  <td><?= $val['order_status']==1 ? 'Chưa xác nhận' :  date('d/m/Y' , strtotime($val['updated_at']))   ?></td>
                  
                   <td >
                 

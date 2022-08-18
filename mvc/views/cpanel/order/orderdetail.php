@@ -5,7 +5,7 @@ $redirect = new redirect();
 
 // print_r($data);die;
 ?>
-<style>
+<!-- <style>
 .order_detail_title {
     font-size: 20px;
     margin-top: 20px;
@@ -23,7 +23,12 @@ $redirect = new redirect();
     color: blue;
     font-weight: 600;
 }
-</style>
+.print_order a{
+    font-size: 16px;
+    color: green;
+}
+</style> -->
+<link rel="stylesheet" href="mvc/views/cpanel/order/orderdetail.css">
 <div class="">
 <div class="page-title">
                         <div class="title_left"> 
@@ -118,7 +123,7 @@ $redirect = new redirect();
           <?php } ?>
   </table>
 </div>
-    <div class="row order_info">
+    <div class="row g-0 order_info ">
                 <div class="col col-6 infor-pay-total order_info_tag">Tổng tiền</div>
                 <div class="col col-6 text-right"><span class="<?= isset($data['order'])? "price-custom-text infor-pay-total" : "price-custom-text infor-pay-total final_money"?>" ><?= number_format($totalMoney + 20000) ?>đ</span></div>
                 <?php if(isset($data['order']) && $data['order'] != NULL) {?>
@@ -144,5 +149,12 @@ $redirect = new redirect();
                 <?php }?>
     </div>      
     
+    <div class="print_order"><a href="order/printorder/<?= $data['info_customer']['shipping_id'] ?>"> In đơn hàng</a></div>
+
+    <?php if($data['order']['order_status'] == 1){ ?>
+        <button class='btn btn-success confirm_order'><a href="order/confirm_order_admin/<?= $data['order']['order_code']?>">Xác nhận đơn hàng</a> </button>
+    <?php }else{?>
+        <button class='btn btn-success confirm_order'><a href="order/undo_order_admin/<?= $data['order']['order_code']?>">Hoàn tác xác nhận</a> </button>
+    <?php } ?>    
 </div>
 </div>
