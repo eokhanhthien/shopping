@@ -97,7 +97,7 @@
                   </div>
                   <div class="thumbnail-name-product"><?= $val['name'] ?></div>
                   <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
-                  <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>              
+                  <!-- <button onclick="addtoCart('<?= $val['slug'] ?>' , 1)" class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button>             -->
               </div>
           <?php } ?>
           <?php } ?>
@@ -123,7 +123,7 @@
                   </div>
                   <div class="thumbnail-name-product"><?= $val['name'] ?></div>
                   <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
-                  <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>              
+                  <!-- <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>               -->
               </div>
           <?php } ?>
           <?php } ?>

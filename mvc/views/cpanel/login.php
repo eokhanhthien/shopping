@@ -26,7 +26,7 @@ $redirect = new redirect();
   <link href="public/vendors/animate.css/animate.min.css" rel="stylesheet">
 
   <!-- Custom Theme Style -->
-  <link href="public/build/css/custom.min.css" rel="stylesheet">
+  <link href="public/build/css/custom.css" rel="stylesheet">
 </head>
 
 <body class="login">

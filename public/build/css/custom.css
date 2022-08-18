@@ -2686,7 +2686,7 @@ button,
 
 .compose .compose-header {
   padding: 5px;
-  background: #169F85;
+  background: #28a745;
   color: #fff;
   border-top-left-radius: 5px; }
 
@@ -2935,11 +2935,11 @@ a.btn-success, a.btn-primary, a.btn-warning, a.btn-danger {
   color: #fff; }
 
 .btn-success {
-  background: #26B99A;
-  border: 1px solid #169F85; }
+  background: #28a745;
+  border: 1px solid #28a745; }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-  background: #169F85; }
+  background: #28a745; }
 
 .btn-dark {
   color: #E9EDEF;
@@ -3427,7 +3427,7 @@ ul.widget_profile_box li a {
 
 ul.widget_profile_box li a:hover {
   color: #1ABB9C !important;
-  border: 1px solid #26b99a; }
+  border: 1px solid #28a745; }
 
 ul.widget_profile_box li .profile_img {
   width: 85px;
@@ -3939,7 +3939,7 @@ ul.project_files li a i {
 .price {
   font-size: 40px;
   font-weight: 400;
-  color: #26B99A;
+  color: #28a745;
   margin: 0; }
 
 .prod_title {
@@ -4641,7 +4641,7 @@ fieldset {
   background-color: #3498DB; }
 
 .progress-bar-success {
-  background-color: #26B99A; }
+  background-color: #28a745; }
 
 .progress_summary .progress {
   margin: 5px 0 12px !important; }

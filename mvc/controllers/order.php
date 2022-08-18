@@ -25,12 +25,60 @@ require_once "./mvc/controllers/MyController.php";
 
             }
             $data_admin = $this->MyController->getIndexAdmin();
-            $data = $this->OrderModels->select_array('*',NULL,'created_at DESC');
+            $datas = $this->OrderModels->select_array('*',NULL,'created_at DESC');
             $data = [
                 'data_admin' => $data_admin,
                 'title'     =>'Danh sách đơn hàng',
                 'page'      => 'order/index',
-                'data'      =>$data,
+                'data'      =>$datas,
+            ];
+         
+            $this->view('masterlayout',$data);
+        }
+
+        function unconfirmed(){
+            if(!isset($_SESSION['admin']) && $_SESSION['admin'] == NULL){
+                $redirect = new redirect('auth/index');
+            }
+            $data_admin = $this->MyController->getIndexAdmin();
+            $datas = $this->OrderModels->select_array('*',['order_status' => 1],'created_at DESC');
+            $data = [
+                'data_admin' => $data_admin,
+                'title'     =>'Đơn chưa giao',
+                'page'      => 'order/index',
+                'data'      =>$datas,
+            ];
+         
+            $this->view('masterlayout',$data);
+        }
+
+        function shipping(){
+            if(!isset($_SESSION['admin']) && $_SESSION['admin'] == NULL){
+                $redirect = new redirect('auth/index');
+            }
+            $data_admin = $this->MyController->getIndexAdmin();
+            $datas = $this->OrderModels->select_array('*',['order_status' => 2],'created_at DESC');
+            $data = [
+                'data_admin' => $data_admin,
+                'title'     =>'Đơn đang giao',
+                'page'      => 'order/index',
+                'data'      =>$datas,
+            ];
+         
+            $this->view('masterlayout',$data);
+        }
+
+        function delivered(){
+            if(!isset($_SESSION['admin']) && $_SESSION['admin'] == NULL){
+                $redirect = new redirect('auth/index');
+            }
+            $data_admin = $this->MyController->getIndexAdmin();
+            $datas = $this->OrderModels->select_array('*',['order_status' => 3],'created_at DESC');
+            $data = [
+                'data_admin' => $data_admin,
+                'title'     =>'Đơn đã giao',
+                'page'      => 'order/index',
+                'data'      =>$datas,
             ];
          
             $this->view('masterlayout',$data);
@@ -44,9 +92,7 @@ require_once "./mvc/controllers/MyController.php";
             // xem đơn hàng có mả giảm giá không
             $order = $this->OrderModels->select_row('*',['shipping_id' => $shipping_id]);
             $order_coupon_code = $order['order_coupon_code'];
-            if($order_coupon_code != 'No'){
-                $coupon = $this->CouponModels->select_row('*',['coupon_code' => $order_coupon_code]);  
-                if($coupon){
+          
                     $data = [
                         'data_admin' => $data_admin,
                         'title'     =>'Chi tiết đơn hàng',
@@ -55,25 +101,7 @@ require_once "./mvc/controllers/MyController.php";
                         'info_customer'  => $info_customer,
                         'order'     => $order,
                     ];
-                }
-                else{
-                    $data = [
-                        'data_admin' => $data_admin,
-                        'title'     =>'Chi tiết đơn hàng',
-                        'page'      => 'order/orderdetail',
-                        'data'      =>$datas,
-                        'info_customer'  => $info_customer,
-                    ];
-                }
-            }else{
-                $data = [
-                    'data_admin' => $data_admin,
-                    'title'     =>'Chi tiết đơn hàng',
-                    'page'      => 'order/orderdetail',
-                    'data'      =>$datas,
-                    'info_customer'  => $info_customer,
-                ];
-            }
+               
 
 
 
@@ -279,4 +307,11 @@ require_once "./mvc/controllers/MyController.php";
             $this-> OrderModels->update($order , ['order_code' => $order_code]);
             $redirect = new redirect('order');
         }
+
+        function delivered_order_admin($order_code){
+            $order['order_status'] = 3;
+            $this-> OrderModels->update($order , ['order_code' => $order_code]);
+            $redirect = new redirect('order');
+        }
+        
 }

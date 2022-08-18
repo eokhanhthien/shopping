@@ -59,14 +59,21 @@ $redirect = new redirect();
               <tr class="even pointer">
                   <td><?= $key+1 ?></td>
                   <td><?= $val['order_code']?></td>
-                  <td><?= $val['order_status']==1 ? 'Đơn mới <img class="img-symbon" src="mvc/views/frontend/images/new.png" alt="">' : 'Đã xử lý <img class="img-symbon" src="mvc/views/frontend/images/check-mark.png" alt="">'  ?></td>
+                  <?php if($val['order_status']==1){ ?>
+                    <td>Đơn mới <img class="img-symbon" src="mvc/views/frontend/images/new.png" alt=""></td>
+                  <?php }else if($val['order_status']==2){?>
+                    <td>Đang giao hàng <img class="img-symbon" src="mvc/views/frontend/images/shipping.png" alt=""></td>
+                  <?php }else{ ?>
+                    <td>Giao hàng thành công <img class="img-symbon" src="mvc/views/frontend/images/check-mark.png" alt=""></td>
+                  <?php } ?>
+                
                   <td><?= date('d/m/Y' , strtotime($val['created_at'])) ?></td>
                   <td><?= $val['order_status']==1 ? 'Chưa xác nhận' :  date('d/m/Y' , strtotime($val['updated_at']))   ?></td>
                  
                   <td >
                 
                   <!-- http://localhost/shopping/category/delete/45  phải vào đúng link hàm delete thì mới delete được -->
-                  <a href="order/vieworder/<?php echo $val['order_code']?>/<?php echo $val['shipping_id']?>" class="btn btn-success">Xem chi tiết đơn</a>
+                  <a href="order/vieworder/<?php echo $val['order_code']?>/<?php echo $val['shipping_id']?>" class="btn btn-primary">Xem chi tiết đơn</a>
                   <a href="order/delete/<?php echo $val['order_code']?>" class="btn btn-danger">Xóa</a>
                   <!-- <button type="submit" name = "delete" class="btn btn-danger">Xóa</button> -->
                 </td>

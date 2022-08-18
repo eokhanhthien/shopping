@@ -125,7 +125,7 @@ $redirect = new redirect();
 </div>
     <div class="row g-0 order_info ">
                 <div class="col col-6 infor-pay-total order_info_tag">Tổng tiền</div>
-                <div class="col col-6 text-right"><span class="<?= isset($data['order'])? "price-custom-text infor-pay-total" : "price-custom-text infor-pay-total final_money"?>" ><?= number_format($totalMoney + 20000) ?>đ</span></div>
+                <div class="col col-6 text-right"><span class="<?= $data['order']['order_coupon_condition'] == 0 ? "price-custom-text infor-pay-total final_money" : "price-custom-text infor-pay-total"?>" ><?= number_format($totalMoney + 20000) ?>đ</span></div>
                 <?php if(isset($data['order']) && $data['order'] != NULL) {?>
                     
                     <?php if($data['order']['order_coupon_condition'] == 1) {?>
@@ -136,7 +136,7 @@ $redirect = new redirect();
                         <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?=$data['order']['order_coupon_number'] ?>% </span> </div>
                         <div class="col col-6"><span class="price-custom-text order_info_tag">Tổng tiền đã giảm:</span> </div>
                         <div class="col col-6 text-right"><span class="price-custom-text final_money" id="final-price"> <?= number_format(($totalMoney-$total_coupon)+20000) ;?>đ </span> </div>
-                    <?php }else{?>
+                    <?php }else if($data['order']['order_coupon_condition'] == 2){?>
                         <?php 
                             $total_coupon = $data['order']['order_coupon_number'];
                         ?>
@@ -144,6 +144,8 @@ $redirect = new redirect();
                         <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?=number_format($data['order']['order_coupon_number']) ?>đ</span> </div>
                         <div class="col col-6"><span class="price-custom-text order_info_tag">Tổng tiền đã giảm:</span> </div>
                         <div class="col col-6 text-right"><span class="price-custom-text final_money" id="final-price"> <?= number_format(($totalMoney-$total_coupon)+20000) ;?>đ </span> </div>
+                        <?php }else{?>
+
                         <?php }?>
                    
                 <?php }?>
@@ -152,9 +154,12 @@ $redirect = new redirect();
     <div class="print_order"><a href="order/printorder/<?= $data['info_customer']['shipping_id'] ?>"> In đơn hàng</a></div>
 
     <?php if($data['order']['order_status'] == 1){ ?>
-        <button class='btn btn-success confirm_order'><a href="order/confirm_order_admin/<?= $data['order']['order_code']?>">Xác nhận đơn hàng</a> </button>
-    <?php }else{?>
-        <button class='btn btn-success confirm_order'><a href="order/undo_order_admin/<?= $data['order']['order_code']?>">Hoàn tác xác nhận</a> </button>
-    <?php } ?>    
+        <button class='btn btn-primary confirm_order'><a href="order/confirm_order_admin/<?= $data['order']['order_code']?>">Xác nhận đơn hàng</a> </button>
+    <?php }else if($data['order']['order_status'] == 2){?>
+        <button class='btn btn-success confirm_order'><a href="order/delivered_order_admin/<?= $data['order']['order_code']?>">Giao hàng thành công</a> </button>
+        <button class='btn btn-danger confirm_order'><a href="order/undo_order_admin/<?= $data['order']['order_code']?>">Hoàn tác xác nhận</a> </button>  
+    <?php }else{
+        
+    } ?>    
 </div>
 </div>

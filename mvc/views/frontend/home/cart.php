@@ -144,7 +144,7 @@ $redirect = new redirect();
                             $total_coupon = ($totalMoney*$_SESSION['coupon']['coupon_number'])/100;
                         ?>
                         <div class="col col-6"><span class="price-custom-text">Mã giảm:</span> </div>
-                        <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?=$_SESSION['coupon']['coupon_number'] ?>% </span> </div>
+                        <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"><img class="img-symbon" src="mvc/views/frontend/images/sale.png" alt=""> <?=$_SESSION['coupon']['coupon_number'] ?>% </span> </div>
                         <div class="col col-6"><span class="price-custom-text">Tổng tiền đã giảm:</span> </div>
                         <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?= number_format(($totalMoney-$total_coupon)+20000) ;?>đ </span> </div>
                     <?php }else{?>
@@ -152,7 +152,7 @@ $redirect = new redirect();
                             $total_coupon = $_SESSION['coupon']['coupon_number'];
                         ?>
                         <div class="col col-6"><span class="price-custom-text">Mã giảm:</span> </div>
-                        <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?=number_format($_SESSION['coupon']['coupon_number']) ?>đ</span> </div>
+                        <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"><img class="img-symbon" src="mvc/views/frontend/images/sale.png" alt=""> <?=number_format($_SESSION['coupon']['coupon_number']) ?>đ</span> </div>
                         <div class="col col-6"><span class="price-custom-text">Tổng tiền đã giảm:</span> </div>
                         <div class="col col-6 text-right"><span class="price-custom-text " id="final-price"> <?= number_format(($totalMoney-$total_coupon)+20000) ;?>đ </span> </div>
                         <?php }?>

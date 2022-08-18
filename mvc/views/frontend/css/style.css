@@ -78,6 +78,7 @@ body::-webkit-scrollbar-thumb
     right: 52px;
     font-size: 20px;
     cursor: pointer;
+    color: #ccc;
 }
 .search-header-dropdow {
     position: absolute;
