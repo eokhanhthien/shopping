@@ -75,7 +75,7 @@ $redirect = new redirect();
 
             <div class="row g-0 mb-10">
                     <div class="col col-xl-4">
-                        <p class="infor-pay-name">Phương thức thanh toán</p> 
+                        <p class="infor-pay-name">Phương thức TT :</p> 
                     </div>
                     <div class="col col-xl-8">
                         <select name="data_payment[shipping_method]" id="wards" class="address-main wards" >

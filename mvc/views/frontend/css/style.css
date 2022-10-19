@@ -1150,3 +1150,31 @@ input.input_value_quantity::-webkit-inner-spin-button {
     position: sticky;
     top: 156px;
 }
+p.label_info_user {
+    color: #333;
+}
+input.label_info_user_inout {
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+.img_avt_size{
+    width: 80px;
+    height: 80px;
+}
+.img_avt_size img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.align-items-ct{
+    display: flex; /* Important */ 
+    align-items: center; /* Important */ 
+}
+.choose-avt-btn{
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 6px;
+    margin: 10px 0 0 0;
+    font-size: 14px;  
+}

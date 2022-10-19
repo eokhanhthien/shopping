@@ -96,8 +96,8 @@
                           <div class="header-info-customer">
                             <span class="info-customer pb-40"><?= $_SESSION['user-info']['info']['fullname'] ?> <i class="fas fa-user-circle"></i> <i class="fas fa-caret-down"></i></span> 
                             <div class="drop-down-info">
-                              <div class="drop-down-info-item"><i class="fas fa-user-cog"></i> Thông tin tài khoản</div>
-                              <div class="drop-down-info-item"><i class="far fa-edit"></i> Thông tin đơn hàng</div>
+                              <div class="drop-down-info-item"><a href="userinfo"><i class="fas fa-user-cog"></i> Thông tin tài khoản</a></div>
+                              <div class="drop-down-info-item"><a href="userinfo"><i class="far fa-edit"></i> Thông tin đơn hàng</a> </div>
                               <div class="drop-down-info-item"> <a href="authen/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a> </div>
                             </div>
                           </div>

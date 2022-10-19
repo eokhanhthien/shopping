@@ -134,7 +134,7 @@
             <div class="mt-60"></div>
         
             <div  data-tab="properties" class="b-nav-tab active">CẤU HÌNH</div>
-            <div  data-tab="comment" class="b-nav-tab">ĐÁNH GIÁ(0)</div>
+            <div  data-tab="comment" class="b-nav-tab">BÌNH LUẬN (0)</div>
 
             <div id="properties" class="b-tab active">
                 <ul class="properties-content">
@@ -179,7 +179,7 @@
             </div>
             <div id="comment" class="b-tab">
                 <div>Chưa có đánh giá nào</div>
-                <div class="notify-comment">Chỉ những khách hàng đã đăng nhập và mua sản phẩm này mới có thể đưa ra đánh giá.</div>
+                <div class="notify-comment">Chỉ những khách hàng đã đăng nhập mới có thể đưa ra đánh giá.</div>
             </div>
 
             <div class="border-custom-cart " ></div>

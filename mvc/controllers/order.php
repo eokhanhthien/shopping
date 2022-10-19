@@ -44,7 +44,7 @@ require_once "./mvc/controllers/MyController.php";
             $datas = $this->OrderModels->select_array('*',['order_status' => 1],'created_at DESC');
             $data = [
                 'data_admin' => $data_admin,
-                'title'     =>'Đơn chưa giao',
+                'title'     =>'Đơn chưa xác nhận',
                 'page'      => 'order/index',
                 'data'      =>$datas,
             ];
