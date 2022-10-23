@@ -120,9 +120,12 @@
               <div class="row g-0">
                 <div class="col header-menu-text <?php if(!isset($_SERVER['PATH_INFO'])) { echo "header-menu-active";}  {echo " ";} ?>"> <a href="">TRANG CHỦ</a> </div>
                 <div class= "col header-menu-text <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/smartphone') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="smartphone">ĐIỆN THOẠI</a> </div>
-                <div class="col header-menu-text"> <a href="">MÁY TÍNH BẢNG</a> </div>
-                <div class="col header-menu-text"> <a href="">LAPTOP</a> </div>
-                <div class="col header-menu-text"> <a href="">PHỤ KIỆN</a> </div>
+                <div class= "col header-menu-text <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/tablet') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="tablet">MÁY TÍNH BẢNG</a> </div>
+                <div class= "col header-menu-text <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/laptop') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="laptop">LAPTOP</a> </div>
+                <div class= "col header-menu-text <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/accessory') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="accessory">PHỤ KIỆN</a> </div>
+                <!-- <div class="col header-menu-text"> <a href="">MÁY TÍNH BẢNG</a> </div> -->
+                <!-- <div class="col header-menu-text"> <a href="">LAPTOP</a> </div> -->
+                <!-- <div class="col header-menu-text"> <a href="">PHỤ KIỆN</a> </div> -->
                 <div class="col header-menu-text"> <a href="">LIÊN HỆ</a> </div>
               </div>
             </div>
