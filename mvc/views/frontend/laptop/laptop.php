@@ -109,7 +109,7 @@
 
                 </div></div>
             <div id="loadProduct" class="col col-xl-9">
-                <?php require_once "mvc/views/frontend/smartphone/loadProduct.php" ?>
+                <?php require_once "mvc/views/frontend/laptop/loadProduct.php" ?>
 
             </div>
         </div>

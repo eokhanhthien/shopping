@@ -14,7 +14,7 @@ class tablet extends controller {
             $cateSame= $this->sameProduct(85);
 
         //Lấy dữ liệu hãng cho filter
-            $brand = $this->CategoryModels->select_array('*',['publish' => 1 , 'parentID' => 61]);
+            $brand = $this->CategoryModels->select_array('*',['publish' => 1 , 'parentID' => 84]);
             // echo "<pre>";
             // print_r($brand);die;
 
@@ -204,7 +204,7 @@ class tablet extends controller {
                 'total'     =>$total_rows
 
             ];
-            $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
+            $this->viewFrontEnd('frontend/tablet/loadProduct',$data);
         }
         else{
             $cateSame= $this->sameProduct(85);
@@ -227,7 +227,7 @@ class tablet extends controller {
                 'total'     => $total_rows
 
             ];
-            $this->viewFrontEnd('frontend/smartphone/loadProduct',$data);
+            $this->viewFrontEnd('frontend/tablet/loadProduct',$data);
         }
      }
 

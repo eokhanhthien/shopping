@@ -29,7 +29,7 @@
         </div>
 
         <div class="col col-xxl-4 nav-main-product">
-              <a  href="">
+              <a  href="laptop">
               <div class="img-main-product">
                   <img src="mvc/views/frontend/images/phone2.jpg" alt="">
               </div>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="col col-xxl-4 nav-main-product">
-              <a  href="">
+              <a  href="accessory">
               <div class="img-main-product">
                   <img src="mvc/views/frontend/images/phone3.jpg" alt="">
               </div>
@@ -132,7 +132,57 @@
         <div class="swiper-button-prev"></div>
       </div>
 
+
+      <div class="product-selling-title mt-40 mb-40">
+        <hr>
+        <span>LAPTOP</span>
+        <hr>
+     </div>
+        <div class="swiper">
+        <div class="swiper-wrapper">
+        <?php if(isset($data['laptop']) && $data['laptop'] != NULL) { ?>
+        <?php foreach($data['laptop'] as $key => $val) {?>
+            <div class="swiper-slide">
+                  <div class="thumbnail-avt-product">
+                     <a href="home/detail/<?= $val['slug'] ?>"><img src="<?= $val['image'] ?>" alt=""></a> 
+                      <div class="tab-detail-product">CHI TIẾT</div>
+                  </div>
+                  <div class="thumbnail-name-product"><?= $val['name'] ?></div>
+                  <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
+                  <!-- <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>               -->
+              </div>
+          <?php } ?>
+          <?php } ?>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
      
+
+      <div class="product-selling-title mt-40 mb-40">
+        <hr>
+        <span>PHỤ KIỆN</span>
+        <hr>
+     </div>
+        <div class="swiper">
+        <div class="swiper-wrapper">
+        <?php if(isset($data['accessory']) && $data['accessory'] != NULL) { ?>
+        <?php foreach($data['accessory'] as $key => $val) {?>
+            <div class="swiper-slide">
+                  <div class="thumbnail-avt-product">
+                     <a href="home/detail/<?= $val['slug'] ?>"><img src="<?= $val['image'] ?>" alt=""></a> 
+                      <div class="tab-detail-product">CHI TIẾT</div>
+                  </div>
+                  <div class="thumbnail-name-product"><?= $val['name'] ?></div>
+                  <div class="thumbnail-price-product"><?= number_format($val['price']) ?>đ</div>
+                  <!-- <a href="javascript:void(0)" onclick="addtoCart('<?= $val['slug'] ?>' , 1)"><button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button></a>               -->
+              </div>
+          <?php } ?>
+          <?php } ?>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
    
 
      <div class="row mt-60 mb-60">

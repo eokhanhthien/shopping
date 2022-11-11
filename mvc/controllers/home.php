@@ -25,6 +25,11 @@
             $cateTable= $this->sameProduct(85);
             $tablet = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,0,8,'cateID',$cateTable,'id', NULL ,NULL);
 
+            $cateLaptop= $this->sameProduct(92);
+            $laptop = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,0,8,'cateID',$cateLaptop,'id', NULL ,NULL);
+
+            $cateAccessory= $this->sameProduct(91);
+            $accessory = $this->ProductModels->select_array('*',['publish' => 1],'id DESC' ,0,8,'cateID',$cateAccessory,'id', NULL ,NULL);
             // echo "<pre>";
             // print_r( $tablet);die;
             // print_r($_SESSION['cart']);die;
@@ -33,6 +38,8 @@
                 'product'   => $product,
                 'Smartphone'=>$Smartphone,
                 'tablet'   => $tablet,
+                'laptop'   => $laptop,
+                'accessory'   => $accessory,
             ];
              $this->viewFrontEnd('frontend/masterlayout',$data);
          }

@@ -11,7 +11,7 @@
     <div class="Container-app mt-60"> 
         <div class="row mb-60">
             <div class="col col-xl-3">
-                <div class="tag-category-product">MÁY tíNH BẢN</div>
+                <div class="tag-category-product">MÁY TÍNH BẢN</div>
             </div>
             <div class="col col-xl-9">
                 <div class="row g-0 sort-select-container"> 

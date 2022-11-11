@@ -44,7 +44,7 @@
                 cateID : radio_ele.value,
                 betweenPrice : radio_ele_price.value,
 			}
-			callback('smartphone/loadProduct',data);
+			callback('accessory/loadProduct',data);
 		})
 
 			function callback(url,data) {

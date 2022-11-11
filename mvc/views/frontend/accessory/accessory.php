@@ -11,7 +11,7 @@
     <div class="Container-app mt-60"> 
         <div class="row mb-60">
             <div class="col col-xl-3">
-                <div class="tag-category-product">MÁY tíNH BẢN</div>
+                <div class="tag-category-product">PHỤ KIỆN</div>
             </div>
             <div class="col col-xl-9">
                 <div class="row g-0 sort-select-container"> 
@@ -51,7 +51,7 @@
 
                 <div class="group_filter">
                 <div class="filter-tag-container border-filter">
-                    <div class="filter-tag"><i class="fas fa-caret-down"></i><img class="img-symbon" src="mvc/views/frontend/images/brand.png" alt=""> Hãng </div>
+                    <div class="filter-tag"><i class="fas fa-caret-down"></i><img class="img-symbon" src="mvc/views/frontend/images/brand.png" alt=""> Loại phụ kiện </div>
                 </div>
                 <div class="filter-option-container" id="filter_brand">
                     <div class="filter-option"><input type="radio" value="ALL" name="brand" id="" checked> Tất cả</div>
@@ -64,7 +64,7 @@
                 </div>
                 </div>   
 
-                <div class="group_filter">
+                <div class="group_filter" style="display: none;">
                     <div class="filter-tag-container">
                         <div class="filter-tag"><i class="fas fa-caret-down"></i><img class="img-symbon" src="mvc/views/frontend/images/computer-ram.png" alt=""> Ram </div>               
                     </div>
@@ -78,7 +78,7 @@
                     </div>   
                 </div>
 
-                <div class="group_filter">
+                <div class="group_filter"  style="display: none;">
                     <div class="filter-tag-container">
                         <div class="filter-tag"><i class="fas fa-caret-down"></i><img class="img-symbon" src="mvc/views/frontend/images/storage.png" alt=""> Bộ nhớ trong </div>               
                     </div>
@@ -94,7 +94,7 @@
                     </div>   
                 </div>
 
-                <div class="group_filter">
+                <div class="group_filter"  style="display: none;">
                     <div class="filter-tag-container">
                         <div class="filter-tag"><i class="fas fa-caret-down"></i>  <img class="img-symbon" src="mvc/views/frontend/images/deman.png" alt=""> Nhu cầu</div>               
                     </div>
