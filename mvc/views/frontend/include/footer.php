@@ -1,12 +1,12 @@
 <div class="Footer" >
     <div class="Container-app">
-        <div class="row">
-          <div class="col col-xxl-3">
+        <div class="row g-0">
+          <div class="col col-xxl-3 col-12">
             <div class="Footer-title">SHINE SKY</div>
             <div class="Footer-content">SHINE SKY là công ty con của tập đoàn LỘC PHÁT GROUP,đứng đầu trong chuỗi cửa hàng bán lẻ lớn nhất Việt Nam.SHINE SKY sẽ mang đến cho khách hàng những trải nghiệm tuyệt vời nhất.</div>
 
           </div>
-          <div class="col col-xxl-3">
+          <div class="col col-xxl-3 col-12">
             <div class="Footer-title">SẢN PHẤM ĐÁNH GIÁ CAO</div>
               <div class="row mt-3">
                 <div class="col col-xxl-4">
@@ -45,7 +45,7 @@
               </div>
 
           </div>
-          <div class="col col-xxl-3">
+          <div class="col col-xxl-3 col-12" >
             <div class="Footer-title">THÔNG TIN VÀ HƯỚNG DẪN</div>
             <div class="Footer-content custom-bb">Giao hàng và thanh toán </div>
             <div class="Footer-content custom-bb">Chế độ bảo hành </div>
@@ -53,7 +53,7 @@
             <div class="Footer-content custom-bb">Đập hộp và nhận quà </div>
             <div class="Footer-content custom-bb">Chính sách bảo mật </div>
           </div>
-          <div class="col col-xxl-3">
+          <div class="col col-xxl-3 col-12">
             <div class="Footer-title">ĐỊA CHỈ CỬA HÀNG</div>
             <div class="Footer-location">Số 207a, Trần Duy Hưng</div>
             <div class="Footer-location">Số 108, Trần Hưng Đạo</div>

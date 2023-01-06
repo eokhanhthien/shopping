@@ -15,8 +15,8 @@
     </div>
 
     <div class="Container-app mt-60">
-      <div class="row" id="product-hot">
-        <div class="col col-xxl-4 nav-main-product">
+      <div class="row g-0" id="product-hot">
+        <div class="col col-xxl-4 nav-main-product col-12">
               <a  href="smartphone">
               <div class="img-main-product">
                   <img src="mvc/views/frontend/images/phone.jpg" alt="">
@@ -28,7 +28,7 @@
             </a>
         </div>
 
-        <div class="col col-xxl-4 nav-main-product">
+        <div class="col col-xxl-4 nav-main-product col-12">
               <a  href="laptop">
               <div class="img-main-product">
                   <img src="mvc/views/frontend/images/phone2.jpg" alt="">
@@ -40,7 +40,7 @@
             </a>
         </div>
 
-        <div class="col col-xxl-4 nav-main-product">
+        <div class="col col-xxl-4 nav-main-product col-12">
               <a  href="accessory">
               <div class="img-main-product">
                   <img src="mvc/views/frontend/images/phone3.jpg" alt="">
@@ -63,10 +63,10 @@
      </div>
   
 
-     <div class="row">
+     <div class="row g-0">
       <?php if(isset($data['product']) && $data['product'] != NULL) { ?>
         <?php foreach($data['product'] as $key => $val) {?>
-              <div class="col col-xl-3 product-item">
+              <div class="col col-xl-3 product-item col-6">
                   <div class="thumbnail-avt-product">
                      <a href="home/detail/<?= $val['slug'] ?>"><img src="<?= $val['image'] ?>" alt=""></a> 
                       <div class="tab-detail-product">CHI TIẾT</div>
@@ -241,23 +241,42 @@
 <script>
   var swiper = new Swiper('.swiper', {
     slidesPerView: 4,
-    direction: getDirection(),
+    // direction: getDirection(),
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    on: {
-      resize: function () {
-        swiper.changeDirection(getDirection());
-      },
+
+    breakpoints: {
+    // when window width is >= 320px
+    320: {
+      slidesPerView: 2,
+      
     },
+    // when window width is >= 480px
+    480: {
+      slidesPerView: 2,
+      
+    },
+    // when window width is >= 640px
+    640: {
+      slidesPerView: 2,
+      
+    }
+  }
+
+    // on: {
+    //   resize: function () {
+    //     swiper.changeDirection(getDirection());
+    //   },
+    // },
   });
 
-  function getDirection() {
-    var windowWidth = window.innerWidth;
-    var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
+  // function getDirection() {
+  //   var windowWidth = window.innerWidth;
+  //   var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
 
-    return direction;
-  }
+  //   return direction;
+  // }
 </script>
 <!-- Swiper ----end------------------------------------------------------------ -->

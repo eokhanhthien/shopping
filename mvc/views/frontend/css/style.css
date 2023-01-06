@@ -1178,3 +1178,9 @@ input.label_info_user_inout {
     margin: 10px 0 0 0;
     font-size: 14px;  
 }
+
+.Header-mobile{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+}
