@@ -134,7 +134,27 @@
   </div>
 
 
-  <div class="Header-mobile"></div>
+  <div class="Header-mobile">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col Header-mobile-right"><img class="list-moblie" src="mvc/views/frontend/images/list.png"  alt=""></div>
+    </div>
+  </div>
+  <div class="nav-bar-left">
+                <div class="header-menu-text-mobile <?php if(!isset($_SERVER['PATH_INFO'])) { echo "header-menu-active";}  {echo " ";} ?>"> <a href="">TRANG CHỦ</a> </div>
+                <div class= "header-menu-text-mobile <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/smartphone') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="smartphone">ĐIỆN THOẠI</a> </div>
+                <div class= "header-menu-text-mobile <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/tablet') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="tablet">MÁY TÍNH BẢNG</a> </div>
+                <div class= "header-menu-text-mobile <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/laptop') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="laptop">LAPTOP</a> </div>
+                <div class= "header-menu-text-mobile <?php if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/accessory') { echo "header-menu-active";}  {echo " ";} ?>" > <a href="accessory">PHỤ KIỆN</a> </div>
+                <!-- <div class="header-menu-text-mobile"> <a href="">MÁY TÍNH BẢNG</a> </div> -->
+                <!-- <div class="header-menu-text-mobile"> <a href="">LAPTOP</a> </div> -->
+                <!-- <div class="header-menu-text-mobile"> <a href="">PHỤ KIỆN</a> </div> -->
+                <div class= "header-menu-text-mobile "><a href="authen/register">ĐĂNG KÝ</a></div>
+                <div class= "header-menu-text-mobile "><a href="authen">ĐĂNG NHẬP</a></div>
+                <div class="header-menu-text-mobile"> <a href="">LIÊN HỆ</a> </div>
+  </div>
+  <div class="overlay"></div>                   
+
   <script>
   $(document).ready(function(){
   // focus cho dropdown seach và modal ---- Start -------
@@ -172,7 +192,19 @@
   })
 })
 // Bắt sự kiện keyup cho search------End ---------
+</script>
 
-
-
+<script>
+  var list_moblie = document.querySelector(".list-moblie");
+  var overlay = document.querySelector(".overlay");
+  var nav_bar_left = document.querySelector(".nav-bar-left");
+  
+  list_moblie.onclick = () => {
+    nav_bar_left.classList.add("navbar-active");
+    overlay.classList.add("overlay-active");
+  }
+  overlay.onclick = () => {
+    nav_bar_left.classList.remove("navbar-active");
+    overlay.classList.remove("overlay-active");
+  }
 </script>

@@ -260,7 +260,7 @@
     },
     // when window width is >= 640px
     640: {
-      slidesPerView: 2,
+      slidesPerView: 4,
       
     }
   }

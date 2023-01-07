@@ -14,6 +14,9 @@
     }
     .Container-app {
         width: 100%;
+        margin-top: 60px;
+        padding: 0 10px;
+
     }
     .nav-main-product{
         margin: 10px 0 ;
@@ -30,6 +33,20 @@
     }
     .Content{
         padding: 0;
+        margin-top: 60px;
+    }
+    .Header-mobile{
+        display: block;
+    }
+    .img-size-detail{
+        width: 100%;
+    }
+  
+    .info-ul ol, ul {
+        padding-left: 0;
+    }
+    .properties-content{
+        width: 100%;
     }
 }
 

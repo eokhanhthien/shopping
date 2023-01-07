@@ -145,36 +145,11 @@
                     <?php if(isset($properties) && $properties != NULL) {?>
                         <?php foreach($properties as $key => $val) {?>
                             <div class="row g-0 properties-item <?= $key%2==0?'properties-color':''?>">
-                                <div class="col"><?= $val['name'] ?></div>
-                                <div class="col"><?= $val['value'] ?></div>
+                                <div class="col col-6"><?= $val['name'] ?></div>
+                                <div class="col col-6"><?= $val['value'] ?></div>
                             </div>
                         <?php }?>    
-                    <?php }?>    
-
-                    <!-- <div class="row g-0 properties-item properties-color">
-                                <div class="col">Màn hình:</div>
-                                <div class="col">Dynamic AMOLED 2X6.8"Quad HD+ (2K+)</div>
-                    </div>
-                    <li>
-                        <div class="row g-0 properties-item properties-color">
-                            <div class="col">Màn hình:</div>
-                            <div class="col">Dynamic AMOLED 2X6.8"Quad HD+ (2K+)</div>
-                        </div>
-                    </li>
-                     <li>                        
-                        <div class="row g-0 properties-item">
-                            <div class="col">Hệ điều hành:</div>
-                            <div class="col">Android 11</div>
-                        </div>
-                    </li>    
-                     <li>                        
-                        <div class="row g-0 properties-item properties-color">
-                            <div class="col">Màn hình:</div>
-                            <div class="col">Dynamic AMOLED 2X6.8"Quad HD+ (2K+)</div>
-                        </div>
-                    </li>     -->
-
-                    
+                    <?php }?>                     
                 </ul>
             </div>
             <div id="comment" class="b-tab">
@@ -189,7 +164,7 @@
             <div class="row">
                 <?php if(isset($data['product_same']) && $data['product_same'] != NULL) { ?>
                     <?php foreach($data['product_same'] as $key => $val) {?>
-                        <div class="col col-xxl-3 product-item">
+                        <div class="col col-xxl-3 product-item col-6">
                             <div class="thumbnail-avt-product">
                                 <a href="home/detail/<?= $val['slug'] ?>"><img src="<?= $val['image'] ?>" alt=""></a> 
                                 <div class="tab-detail-product">CHI TIẾT</div>

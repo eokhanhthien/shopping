@@ -1183,4 +1183,72 @@ input.label_info_user_inout {
     width: 100%;
     height: 60px;
     background-color: white;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+.Header-mobile-right{
+    text-align: end;
+    line-height: 60px;
+}
+.Header-mobile-right img{
+    width: 50px;
+}
+.nav-bar-left{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 40px 0 0 10px ;
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: .4s;
+
+}
+.header-menu-text-mobile{
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 16px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+
+.header-menu-text-mobile a{
+    color: #7d7d7d;
+    text-decoration: none;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    background-color:rgba(0,0,0,.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: .4s;
+}
+.overlay-active{
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-active{
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
 }
