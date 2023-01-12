@@ -48,6 +48,12 @@
     .properties-content{
         width: 100%;
     }
+    .custom-select-sort select{
+        padding: 0;
+    }
+    .filter_container_parent {
+        display: none !important;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

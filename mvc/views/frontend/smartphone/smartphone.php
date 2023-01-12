@@ -10,10 +10,10 @@
 
     <div class="Container-app mt-60"> 
         <div class="row mb-60">
-            <div class="col col-xl-3">
+            <div class="col col-xl-3 col-4">
                 <div class="tag-category-product">ĐIỆN THOẠI</div>
             </div>
-            <div class="col col-xl-9">
+            <div class="col col-xl-9 col-8">
                 <div class="row g-0 sort-select-container"> 
                     <!-- <div class="col col-xl-4">Hiển thị của 1 - 6 của 12 kết quả</div> -->
                  
